@@ -111,8 +111,13 @@
     color: #fff;
   }
   .lang-flag {
-    margin-right: 4px;
-    font-size: 13px;
+    display: inline-block;
+    width: 18px;
+    height: 12px;
+    margin-right: 6px;
+    border-radius: 1px;
+    vertical-align: -2px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.08);
   }
   @media (max-width: 760px) {
     header.site nav a:not(.cta) { display: none; }
@@ -443,8 +448,22 @@
       <a href="#methodology" data-i18n="nav.methodology">Methodology</a>
       <a href="#about" data-i18n="nav.about">About</a>
       <div class="lang-switch" role="group" aria-label="Language">
-        <button type="button" data-lang="en" class="active"><span class="lang-flag">🇺🇸</span>EN</button>
-        <button type="button" data-lang="es"><span class="lang-flag">🇨🇴</span>ES</button>
+        <button type="button" data-lang="en" class="active">
+          <svg class="lang-flag" viewBox="0 0 19 10" preserveAspectRatio="none" aria-hidden="true">
+            <rect width="19" height="10" fill="#B22234"/>
+            <rect y="1" width="19" height="1" fill="#fff"/>
+            <rect y="3" width="19" height="1" fill="#fff"/>
+            <rect y="5" width="19" height="1" fill="#fff"/>
+            <rect y="7" width="19" height="1" fill="#fff"/>
+            <rect y="9" width="19" height="1" fill="#fff"/>
+            <rect width="7.6" height="5.5" fill="#3C3B6E"/>
+          </svg>EN</button>
+        <button type="button" data-lang="es">
+          <svg class="lang-flag" viewBox="0 0 6 4" preserveAspectRatio="none" aria-hidden="true">
+            <rect width="6" height="2" fill="#FCD116"/>
+            <rect y="2" width="6" height="1" fill="#003893"/>
+            <rect y="3" width="6" height="1" fill="#CE1126"/>
+          </svg>ES</button>
       </div>
       <a class="cta" href="#cta" data-i18n="nav.cta">Request Site Visit</a>
     </nav>
