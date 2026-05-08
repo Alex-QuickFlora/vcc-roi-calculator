@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vacuum Cooling Colombia — ROI Calculator</title>
+<meta name="description" content="See how much vacuum cooling can save your cut-flower export operation. Interactive ROI calculator from Vacuum Cooling Colombia." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abel&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Vacuum Cooling Colombia brand palette */
+    --ink: #1a3a44;          /* deep slate teal — headings */
+    --ink-soft: #416E79;     /* brand secondary — body text */
+    --muted: #6b8089;        /* muted slate */
+    --line: #d6e3e6;         /* light teal border */
+    --bg: #f4f8f9;           /* page background */
+    --card: #ffffff;
+    --brand: #00A8BB;        /* PRIMARY teal */
+    --brand-soft: #e0f4f6;   /* tint for headline rows */
+    --brand-dark: #007e8c;   /* hover / depth */
+    --brand-deep: #416E79;   /* dark teal for hero / nav */
+    --accent: #C91C69;       /* magenta accent — stripe in logo */
+    --accent-soft: #fde8f0;
+    --warn-bg: #fef7ec;
+    --good-bg: #e0f4f6;
+    --shadow: 0 1px 3px rgba(26,58,68,.06), 0 8px 24px rgba(26,58,68,.06);
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: "Abel", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0;
+  }
+  a { color: var(--brand); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ---- Layout ---- */
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 64px 0; }
+  section + section { border-top: 1px solid var(--line); }
+
+  /* ---- Header ---- */
+  header.site {
+    background: #fff;
+    color: var(--ink);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 1px 0 rgba(26,58,68,.04);
+  }
+  header.site::after {
+    /* magenta accent stripe — matches the hairline under the logo wordmark */
+    content: ""; display: block; height: 2px;
+    background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
+    position: absolute; left: 0; right: 0; bottom: -2px;
+  }
+  header.site .container {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  header.site .brand-mark {
+    display: flex; align-items: center; gap: 12px;
+  }
+  header.site .brand-mark img {
+    height: 44px; width: auto; display: block;
+  }
+  header.site nav a {
+    color: var(--ink-soft); margin-left: 22px; font-size: 14px; font-weight: 500;
+  }
+  header.site nav a:hover { color: var(--brand); text-decoration: none; }
+  header.site .cta {
+    background: var(--brand); color: #fff; padding: 9px 16px;
+    border-radius: 6px; font-size: 14px; font-weight: 600;
+    margin-left: 22px;
+  }
+  header.site .cta:hover { background: var(--brand-dark); text-decoration: none; color: #fff; }
+  @media (max-width: 760px) {
+    header.site nav a:not(.cta) { display: none; }
+    header.site .brand-mark img { height: 38px; }
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    background:
+      radial-gradient(1200px 500px at 80% -10%, rgba(0,168,187,.35), transparent 60%),
+      linear-gradient(180deg, #1a3a44 0%, #416E79 100%);
+    color: #fff;
+    padding: 80px 0 72px;
+    position: relative;
+  }
+  .hero::after {
+    content: ""; display: block; height: 3px;
+    background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
+    position: absolute; left: 0; right: 0; bottom: 0;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 4.4vw, 52px);
+    line-height: 1.1;
+    margin: 0 0 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    max-width: 880px;
+  }
+  .hero p.lede {
+    font-size: clamp(16px, 1.6vw, 19px);
+    color: #d6eef1;
+    max-width: 760px;
+    margin: 0 0 28px;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 36px;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: var(--radius);
+    padding: 18px 18px;
+  }
+  .hero-stat .label { font-size: 12px; color: #b8d8de; text-transform: uppercase; letter-spacing: .06em; }
+  .hero-stat .value { font-size: 26px; font-weight: 700; margin-top: 6px; color: #fff; }
+  .hero-stat .sub { font-size: 12px; color: #b8d8de; margin-top: 4px; }
+  @media (max-width: 760px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ---- Section headers ---- */
+  .eyebrow {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: clamp(26px, 3vw, 34px);
+    margin: 0 0 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  h3 { font-size: 18px; margin: 0 0 8px; font-weight: 600; }
+  p.section-lede { color: var(--muted); max-width: 780px; margin: 0 0 36px; font-size: 17px; }
+
+  /* ---- Problem section ---- */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .problem-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 22px;
+  }
+  .problem-card h3 { color: var(--ink); }
+  .problem-card p { color: var(--muted); font-size: 15px; margin: 0; }
+  @media (max-width: 860px) {
+    .problem-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---- Calculator ---- */
+  #calculator { background: var(--card); }
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  @media (max-width: 1000px) {
+    .calc-grid { grid-template-columns: 1fr; }
+  }
+  .calc-inputs, .calc-results {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .calc-section-title {
+    background: #f0f4f7;
+    border-bottom: 1px solid var(--line);
+    padding: 12px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .input-row {
+    display: grid;
+    grid-template-columns: 1fr 140px;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .input-row:last-child { border-bottom: none; }
+  .input-row .label { font-size: 14px; color: var(--ink); font-weight: 500; }
+  .input-row .help { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .input-row input[type="number"] {
+    width: 100%;
+    padding: 9px 11px;
+    border: 1px solid #cfd8df;
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: inherit;
+    background: #f9fbfc;
+    color: var(--ink);
+    text-align: right;
+  }
+  .input-row input[type="number"]:focus {
+    outline: none;
+    border-color: var(--brand);
+    background: #fff;
+    box-shadow: 0 0 0 3px var(--brand-soft);
+  }
+  .preset-row {
+    display: flex; gap: 8px; padding: 14px 18px; flex-wrap: wrap;
+    background: #fafcfd; border-bottom: 1px solid var(--line);
+  }
+  .preset-row .preset-label {
+    font-size: 12px; color: var(--muted); align-self: center; margin-right: 6px;
+    text-transform: uppercase; letter-spacing: .06em; font-weight: 600;
+  }
+  .preset-btn {
+    background: #fff; border: 1px solid #cfd8df; color: var(--ink-soft);
+    padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;
+    cursor: pointer; font-family: inherit;
+  }
+  .preset-btn:hover { border-color: var(--brand); color: var(--brand); }
+  .preset-btn.active { background: var(--brand); border-color: var(--brand); color: #fff; }
+
+  /* Results */
+  .result-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 12px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .result-row:last-child { border-bottom: none; }
+  .result-row .label { font-size: 14px; color: var(--ink-soft); }
+  .result-row .value {
+    font-size: 16px; font-weight: 600; color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .result-row.headline {
+    background: var(--brand-soft);
+  }
+  .result-row.headline .label {
+    color: var(--brand-dark); font-weight: 600; font-size: 14px;
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+  .result-row.headline .value {
+    color: var(--brand-dark); font-size: 22px; font-weight: 700;
+  }
+  .result-row.subdued .label { color: var(--muted); font-size: 13px; }
+  .result-row.subdued .value { color: var(--muted); font-weight: 500; font-size: 14px; }
+
+  .payback-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    padding: 18px;
+  }
+  .payback-card {
+    background: var(--good-bg);
+    border: 1px solid #b6dfe5;
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .payback-card .label { font-size: 12px; color: var(--brand-dark); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+  .payback-card .value { font-size: 24px; font-weight: 700; color: var(--brand-dark); margin-top: 4px; }
+  .payback-card .sub { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+
+  .calc-disclaimer {
+    background: var(--warn-bg);
+    border-top: 1px solid #f0e0c0;
+    padding: 14px 18px;
+    font-size: 12px;
+    color: #6b4d1a;
+  }
+
+  /* ---- Methodology ---- */
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 760px) { .method-grid { grid-template-columns: 1fr; } }
+  .method-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 20px;
+  }
+  .method-card h3 { font-size: 15px; color: var(--ink); margin-bottom: 6px; }
+  .method-card p { font-size: 14px; color: var(--muted); margin: 0; }
+
+  /* ---- CTA ---- */
+  #cta {
+    background:
+      radial-gradient(800px 400px at 20% 0%, rgba(255,255,255,.12), transparent 60%),
+      linear-gradient(180deg, var(--brand) 0%, var(--brand-dark) 100%);
+    color: #fff;
+    text-align: center;
+    position: relative;
+  }
+  #cta::before {
+    content: ""; display: block; height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--brand) 100%);
+    position: absolute; left: 0; right: 0; top: 0;
+  }
+  #cta h2 { color: #fff; }
+  #cta p { color: #d6f0f3; font-size: 17px; max-width: 680px; margin: 0 auto 28px; }
+  .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary, .btn-secondary {
+    display: inline-block;
+    padding: 13px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+  }
+  .btn-primary {
+    background: #fff; color: var(--brand-dark);
+  }
+  .btn-primary:hover { background: #e0f4f6; text-decoration: none; }
+  .btn-secondary {
+    background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.4);
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+  /* ---- About + Contact ---- */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;
+  }
+  @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }
+  .contact-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 24px;
+  }
+  .contact-card h3 { font-size: 16px; margin-bottom: 4px; }
+  .contact-card .role { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
+  .contact-list { list-style: none; padding: 0; margin: 0; font-size: 14px; }
+  .contact-list li { padding: 4px 0; color: var(--ink-soft); }
+  .contact-list li strong { color: var(--ink); display: inline-block; min-width: 80px; }
+  .facilities {
+    margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--line);
+  }
+  .facilities h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 10px; }
+  .facility { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; }
+  .facility strong { color: var(--ink); }
+
+  /* ---- Footer ---- */
+  footer.site {
+    background: var(--brand-deep);
+    color: #c2dde2;
+    padding: 28px 0;
+    font-size: 13px;
+    text-align: center;
+    position: relative;
+  }
+  footer.site::before {
+    content: ""; display: block; height: 2px;
+    background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
+    position: absolute; left: 0; right: 0; top: 0;
+  }
+  footer.site a { color: #fff; }
+
+  /* ---- Print ---- */
+  @media print {
+    header.site, #cta, footer.site { display: none; }
+    .hero { background: #fff; color: #000; }
+    .hero h1, .hero-stat .value, .hero-stat .label, .hero-stat .sub, .hero p.lede { color: #000; }
+    .hero-stat { border: 1px solid #ccc; background: #fff; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="container">
+    <a class="brand-mark" href="#" aria-label="Vacuum Cooling Colombia">
+      <img src="https://vacuumcoolingcolombia.com/wp-content/uploads/cropped-logo-nuevo.png"
+           alt="Vacuum Cooling Colombia — Certified Cold Chain From Origin" />
+    </a>
+    <nav>
+      <a href="#problem">The Problem</a>
+      <a href="#calculator">ROI Calculator</a>
+      <a href="#methodology">Methodology</a>
+      <a href="#about">About</a>
+      <a class="cta" href="#cta">Request Site Visit</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>See exactly how much your farm loses to inadequate pre-cooling — and how fast vacuum cooling pays it back.</h1>
+    <p class="lede">For a typical 50-hectare cut-flower export operation, vacuum cooling cuts post-harvest waste from 5–8% to 1–3% of shipped volume. That recovers roughly $1 million per year in revenue and pays for the equipment in under five months. Adjust the calculator below to model your operation.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="label">Direct waste cut</div>
+        <div class="value">4.5 pp</div>
+        <div class="sub">From 6.5% baseline to 2% with VCC</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">Typical monthly savings</div>
+        <div class="value">$83.5K</div>
+        <div class="sub">Direct + secondary, 50-ha standard farm</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">Payback (total savings)</div>
+        <div class="value">~2.6 mo</div>
+        <div class="sub">On a $220K installed system</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">5-year net impact</div>
+        <div class="value">$4.79M</div>
+        <div class="sub">Cumulative savings minus investment</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="container">
+    <div class="eyebrow">Why pre-cooling matters</div>
+    <h2>The hidden cost of forced-air cooling alone</h2>
+    <p class="section-lede">Cut flowers entering the cold chain with residual field heat or surface moisture face a documented set of risks — even when reefer containers run at 1°C and 80% RH. Operators relying solely on forced-air cooling rooms consistently lose 5–8% of shipped volume to these mechanisms.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <h3>Botrytis germination</h3>
+        <p>Free water on petals at 1°C creates ideal germination conditions. Botrytis cinerea is the leading cause of arrival-quality claims and rejected pallets.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Microclimate hot spots</h3>
+        <p>Inside cartons, local humidity can hit 100% and respiration accelerates — especially in pallet cores that take 12–24 hours to fully reach target temperature.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Freezing damage</h3>
+        <p>Residual droplets contacting sub-zero evaporator surfaces cause localized freezing, water-soaking, translucent petals, and browning.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Grade downgrades</h3>
+        <p>Cosmetic and vase-life issues drop A-grade stems to B-grade in transit, eroding FOB pricing — and the gap is widest on premium varieties.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Importer claims</h3>
+        <p>Quality-related credits typically run 1.5–3% of FOB revenue. Premium importers apply tighter tolerances and faster claims processes.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Shortened vase life</h3>
+        <p>Accelerated ethylene production means rejections at retail and credits back to the grower — costs that compound across the season.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="calculator" style="background: #fafcfd;">
+  <div class="container">
+    <div class="eyebrow">Interactive ROI calculator</div>
+    <h2>Model your operation</h2>
+    <p class="section-lede">Adjust the inputs on the left to match your farm. Results update instantly. Defaults reflect a 50-hectare commodity rose operation; use the presets for premium specialty growers or large multi-farm groups.</p>
+
+    <div class="calc-grid">
+      <div class="calc-inputs">
+
+        <div class="preset-row">
+          <span class="preset-label">Quick presets:</span>
+          <button class="preset-btn active" data-preset="commodity">Commodity (50 ha, $0.25 FOB)</button>
+          <button class="preset-btn" data-preset="premium">Premium (50 ha, $0.50 FOB)</button>
+          <button class="preset-btn" data-preset="hydrangea">Hydrangea (25 ha, $2.00 FOB)</button>
+        </div>
+
+        <div class="calc-section-title">1. Production inputs</div>
+
+        <div class="input-row">
+          <div>
+            <div class="label">Cultivated area (hectares)</div>
+            <div class="help">Total hectares of cut-flower production</div>
+          </div>
+          <input type="number" id="hectares" value="50" min="1" step="1" />
+        </div>
+
+        <div class="input-row">
+          <div>
+            <div class="label">Annual yield (stems per hectare)</div>
+            <div class="help">Industry standard for export roses; carnations/mums vary</div>
+          </div>
+          <input type="number" id="yield" value="1000000" min="1" step="10000" />
+        </div>
+
+        <div class="input-row">
+          <div>
+            <div class="label">Blended FOB price per stem ($)</div>
+            <div class="help">Std roses $0.20–$0.30, premium $0.40–$0.60, hydrangea $1.50–$3.00</div>
+          </div>
+          <input type="number" id="fob" value="0.25" min="0" step="0.01" />
+        </div>
+
+        <div class="calc-section-title">2. Waste rate assumptions</div>
+
+        <div class="input-row">
+          <div>
+            <div class="label">Baseline waste rate, without VCC (%)</div>
+            <div class="help">Industry typical: 5%–8% with forced-air cooling only</div>
+          </div>
+          <input type="number" id="wasteBase" value="6.5" min="0" max="100" step="0.1" />
+        </div>
+
+        <div class="input-row">
+          <div>
+            <div class="label">Waste rate with vacuum cooling (%)</div>
+            <div class="help">Industry typical: 1%–3% with proper pre-cooling</div>
+          </div>
+          <input type="number" id="wasteVcc" value="2.0" min="0" max="100" step="0.1" />
+        </div>
+
+        <div class="calc-section-title">3. Secondary savings</div>
+
+        <div class="input-row">
+          <div>
+            <div class="label">Importer claims reduction (% of revenue)</div>
+            <div class="help">Quality credits typically drop from 1.5–3% to 0.5–1%</div>
+          </div>
+          <input type="number" id="claimsPct" value="1.5" min="0" max="100" step="0.1" />
+        </div>
+
+        <div class="input-row">
+          <div>
+            <div class="label">Grade retention captured (% of revenue)</div>
+            <div class="help">More A-grade retained; wider impact on premium varieties</div>
+          </div>
+          <input type="number" id="gradePct" value="1.5" min="0" max="100" step="0.1" />
+        </div>
+
+        <div class="input-row">
+          <div>
+            <div class="label">Cold-room energy savings / month ($)</div>
+            <div class="help">~40–60% reduction in kWh per kg cooled</div>
+          </div>
+          <input type="number" id="energy" value="3500" min="0" step="100" />
+        </div>
+
+        <div class="input-row">
+          <div>
+            <div class="label">Labor &amp; throughput savings / month ($)</div>
+            <div class="help">More cold-room turns, less rework, fewer hours per pallet</div>
+          </div>
+          <input type="number" id="labor" value="2500" min="0" step="100" />
+        </div>
+
+        <div class="calc-section-title">4. Investment</div>
+
+        <div class="input-row">
+          <div>
+            <div class="label">Vacuum cooling system cost ($)</div>
+            <div class="help">$180K–$250K typical for 50-ha class operations, installed</div>
+          </div>
+          <input type="number" id="invest" value="220000" min="0" step="1000" />
+        </div>
+
+      </div>
+
+      <div class="calc-results">
+
+        <div class="calc-section-title">Production &amp; revenue</div>
+        <div class="result-row subdued">
+          <div class="label">Annual production (stems)</div>
+          <div class="value" id="annualStems">—</div>
+        </div>
+        <div class="result-row subdued">
+          <div class="label">Monthly production (stems)</div>
+          <div class="value" id="monthlyStems">—</div>
+        </div>
+        <div class="result-row">
+          <div class="label">Average monthly FOB revenue</div>
+          <div class="value" id="monthlyRev">—</div>
+        </div>
+
+        <div class="calc-section-title">Direct waste savings</div>
+        <div class="result-row subdued">
+          <div class="label">Reduction (percentage points)</div>
+          <div class="value" id="wasteDelta">—</div>
+        </div>
+        <div class="result-row subdued">
+          <div class="label">Stems recovered / month</div>
+          <div class="value" id="stemsRecovered">—</div>
+        </div>
+        <div class="result-row headline">
+          <div class="label">Direct savings / month</div>
+          <div class="value" id="directMo">—</div>
+        </div>
+        <div class="result-row subdued">
+          <div class="label">Direct savings / year</div>
+          <div class="value" id="directYr">—</div>
+        </div>
+
+        <div class="calc-section-title">Secondary savings (per month)</div>
+        <div class="result-row subdued">
+          <div class="label">Importer claims reduction</div>
+          <div class="value" id="claimsMo">—</div>
+        </div>
+        <div class="result-row subdued">
+          <div class="label">Grade retention</div>
+          <div class="value" id="gradeMo">—</div>
+        </div>
+        <div class="result-row subdued">
+          <div class="label">Cold-room energy</div>
+          <div class="value" id="energyMo">—</div>
+        </div>
+        <div class="result-row subdued">
+          <div class="label">Labor &amp; throughput</div>
+          <div class="value" id="laborMo">—</div>
+        </div>
+        <div class="result-row">
+          <div class="label">Total secondary / month</div>
+          <div class="value" id="secondaryMo">—</div>
+        </div>
+
+        <div class="calc-section-title">Total financial impact</div>
+        <div class="result-row headline">
+          <div class="label">Total savings / month</div>
+          <div class="value" id="totalMo">—</div>
+        </div>
+        <div class="result-row">
+          <div class="label">Total savings / year</div>
+          <div class="value" id="totalYr">—</div>
+        </div>
+        <div class="result-row">
+          <div class="label">Total savings / 5 years</div>
+          <div class="value" id="total5">—</div>
+        </div>
+        <div class="result-row headline">
+          <div class="label">Net 5-year impact (after equipment)</div>
+          <div class="value" id="net5">—</div>
+        </div>
+        <div class="result-row subdued">
+          <div class="label">5-year ROI multiple</div>
+          <div class="value" id="roiX">—</div>
+        </div>
+
+        <div class="calc-section-title">Payback period</div>
+        <div class="payback-cards">
+          <div class="payback-card">
+            <div class="label">Direct savings only</div>
+            <div class="value" id="paybackDirect">—</div>
+            <div class="sub">months to recover investment</div>
+          </div>
+          <div class="payback-card">
+            <div class="label">Total savings</div>
+            <div class="value" id="paybackTotal">—</div>
+            <div class="sub">months to recover investment</div>
+          </div>
+        </div>
+
+        <div class="calc-disclaimer">
+          Estimates only. Actual savings depend on variety mix, peak-season volume concentration, transit chain, and current cold-chain configuration. Request a site visit for a tailored model.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="methodology">
+  <div class="container">
+    <div class="eyebrow">How the numbers work</div>
+    <h2>Methodology &amp; assumptions</h2>
+    <p class="section-lede">Every figure in the calculator traces back to a documented industry assumption or observed performance metric. Adjust any input to match your operation — the model is intentionally conservative.</p>
+    <div class="method-grid">
+      <div class="method-card">
+        <h3>Yield per hectare</h3>
+        <p>1,000,000 stems/ha/yr is the standard reference for Colombian and Ecuadorian export rose operations. Carnations and chrysanthemums achieve higher density per hectare; hydrangea is substantially lower (100K–250K stems/ha) at much higher FOB.</p>
+      </div>
+      <div class="method-card">
+        <h3>FOB price per stem</h3>
+        <p>$0.25 is a blended commodity-rose average. Premium roses run $0.40–$0.60, garden roses $0.80–$1.50, hydrangea $1.50–$3.00, carnations $0.08–$0.12. Model your variety mix accordingly.</p>
+      </div>
+      <div class="method-card">
+        <h3>Baseline waste (without VCC)</h3>
+        <p>5%–8% reflects industry observation for operations relying on forced-air cooling rooms only. The 6.5% midpoint is the default; peak-season rates (Valentine's, Mother's Day) are typically higher as cold rooms over-load.</p>
+      </div>
+      <div class="method-card">
+        <h3>Post-VCC waste</h3>
+        <p>1%–3% reflects observed performance in farms running vacuum cooling on full export volume. The 2% midpoint is the default. Operations with high Botrytis pressure or long transit chains typically see larger gains.</p>
+      </div>
+      <div class="method-card">
+        <h3>Importer claims</h3>
+        <p>Quality-related credits commonly run 1.5%–3% of FOB revenue and typically drop to 0.5%–1% post-VCC. The default models a 1.5 percentage-point reduction — conservative for premium operations.</p>
+      </div>
+      <div class="method-card">
+        <h3>Grade retention</h3>
+        <p>Forced-air-only operations see 10%–15% of stems downgraded in transit. Vacuum cooling preserves grade for ~80%+ of these stems. Model premium operations at 2.0% to reflect wider A→B price differentials.</p>
+      </div>
+      <div class="method-card">
+        <h3>Energy savings</h3>
+        <p>Vacuum chambers consume more peak power for 20–30 minutes versus 12–24 hours of cold-room operation, reducing total kWh per kilogram of product cooled by 40%–60%.</p>
+      </div>
+      <div class="method-card">
+        <h3>System investment</h3>
+        <p>$180K–$250K installed for commodity-class 50-ha operations; $200K–$280K for premium-class chambers with enhanced controls and gentler vacuum profiles. Final pricing depends on chamber size, controls, and site preparation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="container">
+    <h2>Ready for a tailored ROI projection?</h2>
+    <p>The calculator gives you a directional answer. A site visit gives you a number you can put in front of your CFO. Vacuum Cooling Colombia builds a customized model from your 12 months of stem volume, current waste tracking, and claims history.</p>
+    <div class="cta-buttons">
+      <a class="btn-primary" href="mailto:?subject=Vacuum%20Cooling%20Colombia%20%E2%80%94%20Site%20visit%20request&amp;body=Hello%20Mauricio%2C%0A%0AI%27d%20like%20to%20schedule%20a%20site%20visit%20and%20customized%20ROI%20projection%20for%20our%20operation.%0A%0AFarm%20name%3A%0AHectares%3A%0AVariety%20mix%3A%0ACurrent%20cold-chain%20setup%3A%0A%0AThanks%2C">Request a site visit</a>
+      <a class="btn-secondary" href="https://www.linkedin.com/in/mauricio-gleiser" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="eyebrow">Who you're working with</div>
+    <h2>About Mauricio Gleiser</h2>
+    <div class="about-grid">
+      <div>
+        <p style="font-size:16px; color: var(--ink-soft);">Mauricio Gleiser is the Founder and Managing Partner of Vacuum Cooling Colombia SAS, a pioneer in vacuum cooling technology for Colombia's cut-flower export industry. A mechanical engineer trained at Universidad Nacional de Ingeniería in Lima, Peru, Mauricio has spent more than two decades introducing and refining vacuum cooling for fresh-cut flowers — beginning with the first commercial vacuum cooling operation at Bogotá's cargo terminal in 2001.</p>
+        <p style="font-size:16px; color: var(--ink-soft);">Today, Vacuum Cooling Colombia operates ICA-approved origin inspection facilities in Funza (Bogotá) and Rionegro (Medellín), serving florists, importers, producers, and large retailers across the United States, Europe, and Japan. Mauricio is an active member of PMA (Produce Marketing Association) and WFFSA (Wholesale Florist &amp; Florist Supplier Association), and a founding member of Colombia's Certified Cold Chain Alliance.</p>
+        <p style="font-size:16px; color: var(--ink-soft);">He writes and speaks frequently on cold-chain integrity, sustainable maritime export of cut flowers, and the role of pre-shipment cooling in protecting product quality and reducing post-harvest waste.</p>
+      </div>
+      <div class="contact-card">
+        <h3>Mauricio Gleiser</h3>
+        <div class="role">Managing Partner, Vacuum Cooling Colombia SAS</div>
+        <ul class="contact-list">
+          <li><strong>Website:</strong> <a href="https://vacuumcoolingcolombia.com" target="_blank" rel="noopener">vacuumcoolingcolombia.com</a></li>
+          <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/mauricio-gleiser" target="_blank" rel="noopener">/in/mauricio-gleiser</a></li>
+          <li><strong>Response:</strong> Within 24 hours for qualified inquiries</li>
+        </ul>
+        <div class="facilities">
+          <h4>Facilities</h4>
+          <div class="facility">
+            <strong>Rionegro, Antioquia (MDE)</strong><br/>
+            Variante Las Palmas – Aeropuerto José María Córdoba<br/>
+            Parque Empresarial La Regional, Bodega 59
+          </div>
+          <div class="facility">
+            <strong>Bogotá (BOG)</strong><br/>
+            Terminal Terrestre de Carga 2<br/>
+            Aeropuerto El Dorado, Bodega Menzies
+          </div>
+          <div class="facility">
+            <strong>Funza-Siberia (BOG)</strong><br/>
+            Km 7 Autopista Medellín<br/>
+            Parque Empresarial Interpark, Lote 85, Bodega 5
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container">
+    &copy; <span id="year"></span> Vacuum Cooling Colombia SAS &nbsp;·&nbsp; All figures are conservative estimates based on industry benchmarks. Confidential — for prospective client use.
+  </div>
+</footer>
+
+<script>
+  // Format helpers
+  const fmtUSD0 = n => isFinite(n) ? '$' + Math.round(n).toLocaleString('en-US') : '—';
+  const fmtUSD = n => isFinite(n) ? '$' + Math.round(n).toLocaleString('en-US') : '—';
+  const fmtNum0 = n => isFinite(n) ? Math.round(n).toLocaleString('en-US') : '—';
+  const fmtPP = n => isFinite(n) ? n.toFixed(1) + ' pp' : '—';
+  const fmtMo = n => isFinite(n) && n > 0 ? n.toFixed(1) + ' mo' : '—';
+  const fmtX = n => isFinite(n) && n > 0 ? n.toFixed(1) + 'x' : '—';
+
+  const inputs = ['hectares','yield','fob','wasteBase','wasteVcc','claimsPct','gradePct','energy','labor','invest'];
+
+  function num(id) {
+    const v = parseFloat(document.getElementById(id).value);
+    return isFinite(v) ? v : 0;
+  }
+
+  function recalc() {
+    const hectares = num('hectares');
+    const yieldPerHa = num('yield');
+    const fob = num('fob');
+    const wBase = num('wasteBase') / 100;
+    const wVcc = num('wasteVcc') / 100;
+    const claimsPct = num('claimsPct') / 100;
+    const gradePct = num('gradePct') / 100;
+    const energy = num('energy');
+    const labor = num('labor');
+    const invest = num('invest');
+
+    const annualStems = hectares * yieldPerHa;
+    const monthlyStems = annualStems / 12;
+    const monthlyRev = monthlyStems * fob;
+
+    const wasteDelta = (wBase - wVcc) * 100;
+    const stemsRecovered = monthlyStems * (wBase - wVcc);
+    const directMo = stemsRecovered * fob;
+    const directYr = directMo * 12;
+
+    const claimsMo = monthlyRev * claimsPct;
+    const gradeMo = monthlyRev * gradePct;
+    const energyMo = energy;
+    const laborMo = labor;
+    const secondaryMo = claimsMo + gradeMo + energyMo + laborMo;
+
+    const totalMo = directMo + secondaryMo;
+    const totalYr = totalMo * 12;
+    const total5 = totalYr * 5;
+    const net5 = total5 - invest;
+    const roiX = invest > 0 ? total5 / invest : NaN;
+
+    const paybackDirect = directMo > 0 ? invest / directMo : NaN;
+    const paybackTotal = totalMo > 0 ? invest / totalMo : NaN;
+
+    document.getElementById('annualStems').textContent = fmtNum0(annualStems);
+    document.getElementById('monthlyStems').textContent = fmtNum0(monthlyStems);
+    document.getElementById('monthlyRev').textContent = fmtUSD(monthlyRev);
+
+    document.getElementById('wasteDelta').textContent = fmtPP(wasteDelta);
+    document.getElementById('stemsRecovered').textContent = fmtNum0(stemsRecovered);
+    document.getElementById('directMo').textContent = fmtUSD(directMo);
+    document.getElementById('directYr').textContent = fmtUSD(directYr);
+
+    document.getElementById('claimsMo').textContent = fmtUSD(claimsMo);
+    document.getElementById('gradeMo').textContent = fmtUSD(gradeMo);
+    document.getElementById('energyMo').textContent = fmtUSD(energyMo);
+    document.getElementById('laborMo').textContent = fmtUSD(laborMo);
+    document.getElementById('secondaryMo').textContent = fmtUSD(secondaryMo);
+
+    document.getElementById('totalMo').textContent = fmtUSD(totalMo);
+    document.getElementById('totalYr').textContent = fmtUSD(totalYr);
+    document.getElementById('total5').textContent = fmtUSD(total5);
+    document.getElementById('net5').textContent = fmtUSD(net5);
+    document.getElementById('roiX').textContent = fmtX(roiX);
+
+    document.getElementById('paybackDirect').textContent = fmtMo(paybackDirect);
+    document.getElementById('paybackTotal').textContent = fmtMo(paybackTotal);
+  }
+
+  inputs.forEach(id => {
+    document.getElementById(id).addEventListener('input', recalc);
+  });
+
+  // Presets
+  const presets = {
+    commodity: { hectares: 50, yield: 1000000, fob: 0.25, wasteBase: 6.5, wasteVcc: 2.0,
+                 claimsPct: 1.5, gradePct: 1.5, energy: 3500, labor: 2500, invest: 220000 },
+    premium:   { hectares: 50, yield: 1000000, fob: 0.50, wasteBase: 6.5, wasteVcc: 2.0,
+                 claimsPct: 1.5, gradePct: 2.0, energy: 4000, labor: 3000, invest: 250000 },
+    hydrangea: { hectares: 25, yield: 200000,  fob: 2.00, wasteBase: 6.5, wasteVcc: 2.0,
+                 claimsPct: 2.0, gradePct: 2.5, energy: 4000, labor: 3000, invest: 280000 }
+  };
+
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const p = presets[btn.dataset.preset];
+      if (!p) return;
+      Object.entries(p).forEach(([k,v]) => { document.getElementById(k).value = v; });
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      recalc();
+    });
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  recalc();
+</script>
+
+</body>
+</html>
