@@ -1013,9 +1013,9 @@
       "calc.h2": "Modele su operación",
       "calc.lede": "Ajuste los datos a la izquierda para reflejar su finca. Los resultados se actualizan al instante. Los valores por defecto corresponden a una operación de rosa estándar de 50 hectáreas; use las predeterminadas para productores de variedades premium o grupos multi-finca.",
       "calc.preset.label": "Predeterminadas:",
-      "calc.preset.commodity": "Estándar (50 ha, USD 0,25 FOB)",
-      "calc.preset.premium": "Premium (50 ha, USD 0,50 FOB)",
-      "calc.preset.hydrangea": "Hortensia (25 ha, USD 2,00 FOB)",
+      "calc.preset.commodity": "Estándar (50 ha, ${{cop:0.25}} COP FOB)",
+      "calc.preset.premium": "Premium (50 ha, ${{cop:0.50}} COP FOB)",
+      "calc.preset.hydrangea": "Hortensia (25 ha, ${{cop:2.00}} COP FOB)",
       "calc.sect1": "1. Datos de producción",
       "calc.sect2": "2. Supuestos de tasa de merma",
       "calc.sect3": "3. Ahorros secundarios",
@@ -1024,8 +1024,8 @@
       "calc.in.hectares.h": "Hectáreas totales en producción de flores de corte",
       "calc.in.yield.l": "Rendimiento anual (tallos por hectárea)",
       "calc.in.yield.h": "Estándar de la industria para rosa de exportación; clavel y crisantemo varían",
-      "calc.in.fob.l": "Precio FOB promedio por tallo (USD)",
-      "calc.in.fob.h": "Rosa estándar USD 0,20–0,30; premium USD 0,40–0,60; hortensia USD 1,50–3,00",
+      "calc.in.fob.l": "Precio FOB promedio por tallo (COP)",
+      "calc.in.fob.h": "Rosa estándar ${{cop:0.20}}–${{cop:0.30}} COP; premium ${{cop:0.40}}–${{cop:0.60}} COP; hortensia ${{cop:1.50}}–${{cop:3.00}} COP",
       "calc.in.wb.l": "Tasa de merma base, sin VCC (%)",
       "calc.in.wb.h": "Típico de la industria: 5%–8% solo con aire forzado",
       "calc.in.wv.l": "Tasa de merma con enfriamiento al vacío (%)",
@@ -1034,12 +1034,12 @@
       "calc.in.cl.h": "Los créditos por calidad suelen bajar de 1,5–3% a 0,5–1%",
       "calc.in.gr.l": "Retención de grado capturada (% del ingreso)",
       "calc.in.gr.h": "Más tallos grado A retenidos; mayor impacto en variedades premium",
-      "calc.in.en.l": "Ahorro de energía en cuarto frío / mes (USD)",
+      "calc.in.en.l": "Ahorro de energía en cuarto frío / mes (COP)",
       "calc.in.en.h": "~40–60% de reducción en kWh por kg enfriado",
-      "calc.in.lab.l": "Ahorro en mano de obra y rotación / mes (USD)",
+      "calc.in.lab.l": "Ahorro en mano de obra y rotación / mes (COP)",
       "calc.in.lab.h": "Más rotaciones del cuarto frío, menos reproceso, menos horas por pallet",
-      "calc.in.inv.l": "Costo del sistema de enfriamiento al vacío (USD)",
-      "calc.in.inv.h": "USD 180K–250K típico para operaciones clase 50 ha, instalado",
+      "calc.in.inv.l": "Costo del sistema de enfriamiento al vacío (COP)",
+      "calc.in.inv.h": "Entre {{copC:180000}} y {{copC:250000}} COP típico para operaciones clase 50 ha, instalado",
 
       "res.prod": "Producción e ingresos",
       "res.annual": "Producción anual (tallos)",
@@ -1075,7 +1075,7 @@
       "meth.c1.h": "Rendimiento por hectárea",
       "meth.c1.p": "1.000.000 de tallos/ha/año es la referencia estándar para operaciones de rosa de exportación en Colombia y Ecuador. Clavel y crisantemo alcanzan mayor densidad por hectárea; la hortensia es sustancialmente menor (100K–250K tallos/ha) con FOB mucho más alto.",
       "meth.c2.h": "Precio FOB por tallo",
-      "meth.c2.p": "USD 0,25 es un promedio mezclado para rosa estándar. Rosa premium oscila entre USD 0,40–0,60; rosa de jardín USD 0,80–1,50; hortensia USD 1,50–3,00; clavel USD 0,08–0,12. Modele su mezcla de variedades en consecuencia.",
+      "meth.c2.p": "${{cop:0.25}} COP es un promedio mezclado para rosa estándar. Rosa premium oscila entre ${{cop:0.40}}–${{cop:0.60}} COP; rosa de jardín ${{cop:0.80}}–${{cop:1.50}} COP; hortensia ${{cop:1.50}}–${{cop:3.00}} COP; clavel ${{cop:0.08}}–${{cop:0.12}} COP. Modele su mezcla de variedades en consecuencia.",
       "meth.c3.h": "Merma base (sin VCC)",
       "meth.c3.p": "5%–8% refleja la observación de la industria para operaciones que dependen únicamente de cuartos fríos de aire forzado. El 6,5% intermedio es el valor por defecto; las tasas en temporada alta (San Valentín, Día de la Madre) suelen ser más altas cuando los cuartos fríos se saturan.",
       "meth.c4.h": "Merma con VCC",
@@ -1087,7 +1087,7 @@
       "meth.c7.h": "Ahorro de energía",
       "meth.c7.p": "Las cámaras de vacío consumen más potencia pico durante 20–30 minutos frente a 12–24 horas de operación de cuarto frío, reduciendo el total de kWh por kilogramo de producto enfriado entre 40%–60%.",
       "meth.c8.h": "Inversión del sistema",
-      "meth.c8.p": "USD 180K–250K instalado para operaciones clase estándar de 50 ha; USD 200K–280K para cámaras clase premium con controles mejorados y perfiles de vacío más suaves. El precio final depende del tamaño de la cámara, los controles y la preparación del sitio.",
+      "meth.c8.p": "Entre {{copC:180000}}–{{copC:250000}} COP instalado para operaciones clase estándar de 50 ha; {{copC:200000}}–{{copC:280000}} COP para cámaras clase premium con controles mejorados y perfiles de vacío más suaves. El precio final depende del tamaño de la cámara, los controles y la preparación del sitio.",
 
       "cta.h2": "¿Listo para una proyección de ROI personalizada?",
       "cta.p": "La calculadora le da una respuesta orientativa. Una visita técnica le da una cifra que puede presentar a su CFO. Vacuum Cooling Colombia construye un modelo personalizado a partir de sus últimos 12 meses de volumen de tallos, su seguimiento de mermas actual y su historial de reclamos.",
@@ -1191,11 +1191,51 @@
     ? n.toLocaleString(CURRENT_LANG === 'es' ? 'es-CO' : 'en-US', {minimumFractionDigits:1, maximumFractionDigits:1}) + 'x'
     : '—';
 
-  // Replace {{usd:N}} (full) and {{usdC:N}} (compact) tokens within translation strings
+  // Bare-number variants for use inside ranges (no $ symbol, no COP suffix)
+  function fmtCopBare(usd) {
+    if (!isFinite(usd)) return '—';
+    const rate = FX.rate || FALLBACK_COP_RATE;
+    const v = CURRENT_LANG === 'es' ? Math.round(usd * rate) : usd;
+    return v.toLocaleString(CURRENT_LANG === 'es' ? 'es-CO' : 'en-US');
+  }
+  function fmtCopBareCompact(usd) {
+    if (!isFinite(usd)) return '—';
+    const rate = FX.rate || FALLBACK_COP_RATE;
+    const v = CURRENT_LANG === 'es' ? usd * rate : usd;
+    return new Intl.NumberFormat(CURRENT_LANG === 'es' ? 'es-CO' : 'en-US', {
+      notation: 'compact', maximumFractionDigits: 1
+    }).format(v);
+  }
+
+  // Replace money tokens. Order matters — match longer prefixes first.
   function expandMoneyTokens(text) {
     return text
+      .replace(/\{\{copC:(\d+(?:\.\d+)?)\}\}/g, (_, n) => fmtCopBareCompact(parseFloat(n)))
+      .replace(/\{\{cop:(\d+(?:\.\d+)?)\}\}/g, (_, n) => fmtCopBare(parseFloat(n)))
       .replace(/\{\{usdC:(\d+(?:\.\d+)?)\}\}/g, (_, n) => fmtMoneyCompact(parseFloat(n)))
       .replace(/\{\{usd:(\d+(?:\.\d+)?)\}\}/g, (_, n) => fmtMoney(parseFloat(n)));
+  }
+
+  // ---------- Money inputs: store canonical USD, display USD or COP ----------
+  const MONEY_INPUTS = ['fob', 'energy', 'labor', 'invest'];
+  const usdValues = {};
+
+  function refreshMoneyInputDisplay() {
+    const rate = FX.rate || FALLBACK_COP_RATE;
+    MONEY_INPUTS.forEach(id => {
+      const usd = usdValues[id] || 0;
+      const el = document.getElementById(id);
+      if (CURRENT_LANG === 'es') {
+        el.value = Math.round(usd * rate);
+        if (id === 'fob') el.step = '1';
+        else if (id === 'invest') el.step = '1000000';
+        else el.step = '100000';
+      } else {
+        if (id === 'fob') { el.value = Math.round(usd * 100) / 100; el.step = '0.01'; }
+        else if (id === 'invest') { el.value = Math.round(usd); el.step = '1000'; }
+        else { el.value = Math.round(usd); el.step = '100'; }
+      }
+    });
   }
 
   // ---------- Update FX banner ----------
@@ -1238,6 +1278,7 @@
     });
 
     updateFxNote();
+    refreshMoneyInputDisplay();
 
     // Mailto link
     const mail = document.getElementById('ctaMail');
@@ -1257,7 +1298,11 @@
 
   // ---------- Calculator ----------
   const inputs = ['hectares','yield','fob','wasteBase','wasteVcc','claimsPct','gradePct','energy','labor','invest'];
-  function num(id) { const v = parseFloat(document.getElementById(id).value); return isFinite(v) ? v : 0; }
+  function num(id) {
+    if (MONEY_INPUTS.includes(id)) return usdValues[id] || 0;
+    const v = parseFloat(document.getElementById(id).value);
+    return isFinite(v) ? v : 0;
+  }
 
   function recalc() {
     const hectares = num('hectares');
@@ -1311,7 +1356,17 @@
     set('paybackTotal', fmtMo(paybackTotal));
   }
 
-  inputs.forEach(id => document.getElementById(id).addEventListener('input', recalc));
+  inputs.forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+      if (MONEY_INPUTS.includes(id)) {
+        const displayed = parseFloat(document.getElementById(id).value) || 0;
+        usdValues[id] = CURRENT_LANG === 'es'
+          ? displayed / (FX.rate || FALLBACK_COP_RATE)
+          : displayed;
+      }
+      recalc();
+    });
+  });
 
   // Presets
   const presets = {
@@ -1326,7 +1381,14 @@
     btn.addEventListener('click', () => {
       const p = presets[btn.dataset.preset];
       if (!p) return;
-      Object.entries(p).forEach(([k,v]) => { document.getElementById(k).value = v; });
+      Object.entries(p).forEach(([k,v]) => {
+        if (MONEY_INPUTS.includes(k)) {
+          usdValues[k] = v;
+        } else {
+          document.getElementById(k).value = v;
+        }
+      });
+      refreshMoneyInputDisplay();
       document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       recalc();
@@ -1345,6 +1407,11 @@
     if (stored && TR[stored]) initialLang = stored;
     else if ((navigator.language || '').toLowerCase().startsWith('es')) initialLang = 'es';
   } catch(e) {}
+
+  // Capture canonical USD values from initial HTML before any conversion happens
+  MONEY_INPUTS.forEach(id => {
+    usdValues[id] = parseFloat(document.getElementById(id).value) || 0;
+  });
 
   // Use cached FX rate immediately so first render isn't blocked
   loadCachedFx();
