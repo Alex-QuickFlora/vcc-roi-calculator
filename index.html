@@ -3,25 +3,24 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Vacuum Cooling Colombia — ROI Calculator</title>
-<meta name="description" content="See how much vacuum cooling can save your cut-flower export operation. Interactive ROI calculator from Vacuum Cooling Colombia." />
+<title data-i18n="meta.title">Vacuum Cooling Colombia — ROI Calculator</title>
+<meta name="description" data-i18n-attr="content" data-i18n="meta.desc" content="See how much vacuum cooling can save your cut-flower export operation. Interactive ROI calculator from Vacuum Cooling Colombia." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Abel&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Vacuum Cooling Colombia brand palette */
-    --ink: #1a3a44;          /* deep slate teal — headings */
-    --ink-soft: #416E79;     /* brand secondary — body text */
-    --muted: #6b8089;        /* muted slate */
-    --line: #d6e3e6;         /* light teal border */
-    --bg: #f4f8f9;           /* page background */
+    --ink: #1a3a44;
+    --ink-soft: #416E79;
+    --muted: #6b8089;
+    --line: #d6e3e6;
+    --bg: #f4f8f9;
     --card: #ffffff;
-    --brand: #00A8BB;        /* PRIMARY teal */
-    --brand-soft: #e0f4f6;   /* tint for headline rows */
-    --brand-dark: #007e8c;   /* hover / depth */
-    --brand-deep: #416E79;   /* dark teal for hero / nav */
-    --accent: #C91C69;       /* magenta accent — stripe in logo */
+    --brand: #00A8BB;
+    --brand-soft: #e0f4f6;
+    --brand-dark: #007e8c;
+    --brand-deep: #416E79;
+    --accent: #C91C69;
     --accent-soft: #fde8f0;
     --warn-bg: #fef7ec;
     --good-bg: #e0f4f6;
@@ -44,7 +43,6 @@
   a { color: var(--brand); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  /* ---- Layout ---- */
   .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
   section { padding: 64px 0; }
   section + section { border-top: 1px solid var(--line); }
@@ -61,7 +59,6 @@
     box-shadow: 0 1px 0 rgba(26,58,68,.04);
   }
   header.site::after {
-    /* magenta accent stripe — matches the hairline under the logo wordmark */
     content: ""; display: block; height: 2px;
     background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
     position: absolute; left: 0; right: 0; bottom: -2px;
@@ -75,6 +72,7 @@
   header.site .brand-mark img {
     height: 44px; width: auto; display: block;
   }
+  header.site nav { display: flex; align-items: center; }
   header.site nav a {
     color: var(--ink-soft); margin-left: 22px; font-size: 14px; font-weight: 500;
   }
@@ -85,9 +83,41 @@
     margin-left: 22px;
   }
   header.site .cta:hover { background: var(--brand-dark); text-decoration: none; color: #fff; }
+
+  /* Language switcher */
+  .lang-switch {
+    display: inline-flex;
+    margin-left: 22px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .lang-switch button {
+    border: none;
+    background: transparent;
+    padding: 6px 12px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .lang-switch button:hover { color: var(--brand); }
+  .lang-switch button.active {
+    background: var(--brand);
+    color: #fff;
+  }
+  .lang-flag {
+    margin-right: 4px;
+    font-size: 13px;
+  }
   @media (max-width: 760px) {
     header.site nav a:not(.cta) { display: none; }
     header.site .brand-mark img { height: 38px; }
+    .lang-switch { margin-left: 0; }
   }
 
   /* ---- Hero ---- */
@@ -137,7 +167,6 @@
     .hero-stats { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* ---- Section headers ---- */
   .eyebrow {
     color: var(--accent);
     text-transform: uppercase;
@@ -155,7 +184,6 @@
   h3 { font-size: 18px; margin: 0 0 8px; font-weight: 600; }
   p.section-lede { color: var(--muted); max-width: 780px; margin: 0 0 36px; font-size: 17px; }
 
-  /* ---- Problem section ---- */
   .problem-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -173,7 +201,6 @@
     .problem-grid { grid-template-columns: 1fr; }
   }
 
-  /* ---- Calculator ---- */
   #calculator { background: var(--card); }
   .calc-grid {
     display: grid;
@@ -245,7 +272,6 @@
   .preset-btn:hover { border-color: var(--brand); color: var(--brand); }
   .preset-btn.active { background: var(--brand); border-color: var(--brand); color: #fff; }
 
-  /* Results */
   .result-row {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -260,9 +286,7 @@
     font-size: 16px; font-weight: 600; color: var(--ink);
     font-variant-numeric: tabular-nums;
   }
-  .result-row.headline {
-    background: var(--brand-soft);
-  }
+  .result-row.headline { background: var(--brand-soft); }
   .result-row.headline .label {
     color: var(--brand-dark); font-weight: 600; font-size: 14px;
     text-transform: uppercase; letter-spacing: .04em;
@@ -295,7 +319,6 @@
     color: #6b4d1a;
   }
 
-  /* ---- Methodology ---- */
   .method-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -309,7 +332,6 @@
   .method-card h3 { font-size: 15px; color: var(--ink); margin-bottom: 6px; }
   .method-card p { font-size: 14px; color: var(--muted); margin: 0; }
 
-  /* ---- CTA ---- */
   #cta {
     background:
       radial-gradient(800px 400px at 20% 0%, rgba(255,255,255,.12), transparent 60%),
@@ -336,16 +358,13 @@
     border: none;
     font-family: inherit;
   }
-  .btn-primary {
-    background: #fff; color: var(--brand-dark);
-  }
+  .btn-primary { background: #fff; color: var(--brand-dark); }
   .btn-primary:hover { background: #e0f4f6; text-decoration: none; }
   .btn-secondary {
     background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.4);
   }
   .btn-secondary:hover { background: rgba(255,255,255,.08); text-decoration: none; }
 
-  /* ---- About + Contact ---- */
   .about-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;
   }
@@ -358,7 +377,7 @@
   .contact-card .role { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
   .contact-list { list-style: none; padding: 0; margin: 0; font-size: 14px; }
   .contact-list li { padding: 4px 0; color: var(--ink-soft); }
-  .contact-list li strong { color: var(--ink); display: inline-block; min-width: 80px; }
+  .contact-list li strong { color: var(--ink); display: inline-block; min-width: 90px; }
   .facilities {
     margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--line);
   }
@@ -366,7 +385,6 @@
   .facility { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; }
   .facility strong { color: var(--ink); }
 
-  /* ---- Footer ---- */
   footer.site {
     background: var(--brand-deep);
     color: #c2dde2;
@@ -382,7 +400,6 @@
   }
   footer.site a { color: #fff; }
 
-  /* ---- Print ---- */
   @media print {
     header.site, #cta, footer.site { display: none; }
     .hero { background: #fff; color: #000; }
@@ -401,39 +418,43 @@
            alt="Vacuum Cooling Colombia — Certified Cold Chain From Origin" />
     </a>
     <nav>
-      <a href="#problem">The Problem</a>
-      <a href="#calculator">ROI Calculator</a>
-      <a href="#methodology">Methodology</a>
-      <a href="#about">About</a>
-      <a class="cta" href="#cta">Request Site Visit</a>
+      <a href="#problem" data-i18n="nav.problem">The Problem</a>
+      <a href="#calculator" data-i18n="nav.calculator">ROI Calculator</a>
+      <a href="#methodology" data-i18n="nav.methodology">Methodology</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="en" class="active"><span class="lang-flag">🇺🇸</span>EN</button>
+        <button type="button" data-lang="es"><span class="lang-flag">🇨🇴</span>ES</button>
+      </div>
+      <a class="cta" href="#cta" data-i18n="nav.cta">Request Site Visit</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
   <div class="container">
-    <h1>See exactly how much your farm loses to inadequate pre-cooling — and how fast vacuum cooling pays it back.</h1>
-    <p class="lede">For a typical 50-hectare cut-flower export operation, vacuum cooling cuts post-harvest waste from 5–8% to 1–3% of shipped volume. That recovers roughly $1 million per year in revenue and pays for the equipment in under five months. Adjust the calculator below to model your operation.</p>
+    <h1 data-i18n="hero.h1">See exactly how much your farm loses to inadequate pre-cooling — and how fast vacuum cooling pays it back.</h1>
+    <p class="lede" data-i18n="hero.lede">For a typical 50-hectare cut-flower export operation, vacuum cooling cuts post-harvest waste from 5–8% to 1–3% of shipped volume. That recovers roughly $1 million per year in revenue and pays for the equipment in under five months. Adjust the calculator below to model your operation.</p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="label">Direct waste cut</div>
-        <div class="value">4.5 pp</div>
-        <div class="sub">From 6.5% baseline to 2% with VCC</div>
+        <div class="label" data-i18n="hero.stat1.label">Direct waste cut</div>
+        <div class="value" data-i18n="hero.stat1.value">4.5 pp</div>
+        <div class="sub" data-i18n="hero.stat1.sub">From 6.5% baseline to 2% with VCC</div>
       </div>
       <div class="hero-stat">
-        <div class="label">Typical monthly savings</div>
-        <div class="value">$83.5K</div>
-        <div class="sub">Direct + secondary, 50-ha standard farm</div>
+        <div class="label" data-i18n="hero.stat2.label">Typical monthly savings</div>
+        <div class="value" data-i18n="hero.stat2.value">$83.5K</div>
+        <div class="sub" data-i18n="hero.stat2.sub">Direct + secondary, 50-ha standard farm</div>
       </div>
       <div class="hero-stat">
-        <div class="label">Payback (total savings)</div>
-        <div class="value">~2.6 mo</div>
-        <div class="sub">On a $220K installed system</div>
+        <div class="label" data-i18n="hero.stat3.label">Payback (total savings)</div>
+        <div class="value" data-i18n="hero.stat3.value">~2.6 mo</div>
+        <div class="sub" data-i18n="hero.stat3.sub">On a $220K installed system</div>
       </div>
       <div class="hero-stat">
-        <div class="label">5-year net impact</div>
-        <div class="value">$4.79M</div>
-        <div class="sub">Cumulative savings minus investment</div>
+        <div class="label" data-i18n="hero.stat4.label">5-year net impact</div>
+        <div class="value" data-i18n="hero.stat4.value">$4.79M</div>
+        <div class="sub" data-i18n="hero.stat4.sub">Cumulative savings minus investment</div>
       </div>
     </div>
   </div>
@@ -441,33 +462,33 @@
 
 <section id="problem">
   <div class="container">
-    <div class="eyebrow">Why pre-cooling matters</div>
-    <h2>The hidden cost of forced-air cooling alone</h2>
-    <p class="section-lede">Cut flowers entering the cold chain with residual field heat or surface moisture face a documented set of risks — even when reefer containers run at 1°C and 80% RH. Operators relying solely on forced-air cooling rooms consistently lose 5–8% of shipped volume to these mechanisms.</p>
+    <div class="eyebrow" data-i18n="problem.eyebrow">Why pre-cooling matters</div>
+    <h2 data-i18n="problem.h2">The hidden cost of forced-air cooling alone</h2>
+    <p class="section-lede" data-i18n="problem.lede">Cut flowers entering the cold chain with residual field heat or surface moisture face a documented set of risks — even when reefer containers run at 1°C and 80% RH. Operators relying solely on forced-air cooling rooms consistently lose 5–8% of shipped volume to these mechanisms.</p>
     <div class="problem-grid">
       <div class="problem-card">
-        <h3>Botrytis germination</h3>
-        <p>Free water on petals at 1°C creates ideal germination conditions. Botrytis cinerea is the leading cause of arrival-quality claims and rejected pallets.</p>
+        <h3 data-i18n="problem.c1.h">Botrytis germination</h3>
+        <p data-i18n="problem.c1.p">Free water on petals at 1°C creates ideal germination conditions. Botrytis cinerea is the leading cause of arrival-quality claims and rejected pallets.</p>
       </div>
       <div class="problem-card">
-        <h3>Microclimate hot spots</h3>
-        <p>Inside cartons, local humidity can hit 100% and respiration accelerates — especially in pallet cores that take 12–24 hours to fully reach target temperature.</p>
+        <h3 data-i18n="problem.c2.h">Microclimate hot spots</h3>
+        <p data-i18n="problem.c2.p">Inside cartons, local humidity can hit 100% and respiration accelerates — especially in pallet cores that take 12–24 hours to fully reach target temperature.</p>
       </div>
       <div class="problem-card">
-        <h3>Freezing damage</h3>
-        <p>Residual droplets contacting sub-zero evaporator surfaces cause localized freezing, water-soaking, translucent petals, and browning.</p>
+        <h3 data-i18n="problem.c3.h">Freezing damage</h3>
+        <p data-i18n="problem.c3.p">Residual droplets contacting sub-zero evaporator surfaces cause localized freezing, water-soaking, translucent petals, and browning.</p>
       </div>
       <div class="problem-card">
-        <h3>Grade downgrades</h3>
-        <p>Cosmetic and vase-life issues drop A-grade stems to B-grade in transit, eroding FOB pricing — and the gap is widest on premium varieties.</p>
+        <h3 data-i18n="problem.c4.h">Grade downgrades</h3>
+        <p data-i18n="problem.c4.p">Cosmetic and vase-life issues drop A-grade stems to B-grade in transit, eroding FOB pricing — and the gap is widest on premium varieties.</p>
       </div>
       <div class="problem-card">
-        <h3>Importer claims</h3>
-        <p>Quality-related credits typically run 1.5–3% of FOB revenue. Premium importers apply tighter tolerances and faster claims processes.</p>
+        <h3 data-i18n="problem.c5.h">Importer claims</h3>
+        <p data-i18n="problem.c5.p">Quality-related credits typically run 1.5–3% of FOB revenue. Premium importers apply tighter tolerances and faster claims processes.</p>
       </div>
       <div class="problem-card">
-        <h3>Shortened vase life</h3>
-        <p>Accelerated ethylene production means rejections at retail and credits back to the grower — costs that compound across the season.</p>
+        <h3 data-i18n="problem.c6.h">Shortened vase life</h3>
+        <p data-i18n="problem.c6.p">Accelerated ethylene production means rejections at retail and credits back to the grower — costs that compound across the season.</p>
       </div>
     </div>
   </div>
@@ -475,104 +496,104 @@
 
 <section id="calculator" style="background: #fafcfd;">
   <div class="container">
-    <div class="eyebrow">Interactive ROI calculator</div>
-    <h2>Model your operation</h2>
-    <p class="section-lede">Adjust the inputs on the left to match your farm. Results update instantly. Defaults reflect a 50-hectare commodity rose operation; use the presets for premium specialty growers or large multi-farm groups.</p>
+    <div class="eyebrow" data-i18n="calc.eyebrow">Interactive ROI calculator</div>
+    <h2 data-i18n="calc.h2">Model your operation</h2>
+    <p class="section-lede" data-i18n="calc.lede">Adjust the inputs on the left to match your farm. Results update instantly. Defaults reflect a 50-hectare commodity rose operation; use the presets for premium specialty growers or large multi-farm groups.</p>
 
     <div class="calc-grid">
       <div class="calc-inputs">
 
         <div class="preset-row">
-          <span class="preset-label">Quick presets:</span>
-          <button class="preset-btn active" data-preset="commodity">Commodity (50 ha, $0.25 FOB)</button>
-          <button class="preset-btn" data-preset="premium">Premium (50 ha, $0.50 FOB)</button>
-          <button class="preset-btn" data-preset="hydrangea">Hydrangea (25 ha, $2.00 FOB)</button>
+          <span class="preset-label" data-i18n="calc.preset.label">Quick presets:</span>
+          <button class="preset-btn active" data-preset="commodity" data-i18n="calc.preset.commodity">Commodity (50 ha, $0.25 FOB)</button>
+          <button class="preset-btn" data-preset="premium" data-i18n="calc.preset.premium">Premium (50 ha, $0.50 FOB)</button>
+          <button class="preset-btn" data-preset="hydrangea" data-i18n="calc.preset.hydrangea">Hydrangea (25 ha, $2.00 FOB)</button>
         </div>
 
-        <div class="calc-section-title">1. Production inputs</div>
+        <div class="calc-section-title" data-i18n="calc.sect1">1. Production inputs</div>
 
         <div class="input-row">
           <div>
-            <div class="label">Cultivated area (hectares)</div>
-            <div class="help">Total hectares of cut-flower production</div>
+            <div class="label" data-i18n="calc.in.hectares.l">Cultivated area (hectares)</div>
+            <div class="help" data-i18n="calc.in.hectares.h">Total hectares of cut-flower production</div>
           </div>
           <input type="number" id="hectares" value="50" min="1" step="1" />
         </div>
 
         <div class="input-row">
           <div>
-            <div class="label">Annual yield (stems per hectare)</div>
-            <div class="help">Industry standard for export roses; carnations/mums vary</div>
+            <div class="label" data-i18n="calc.in.yield.l">Annual yield (stems per hectare)</div>
+            <div class="help" data-i18n="calc.in.yield.h">Industry standard for export roses; carnations/mums vary</div>
           </div>
           <input type="number" id="yield" value="1000000" min="1" step="10000" />
         </div>
 
         <div class="input-row">
           <div>
-            <div class="label">Blended FOB price per stem ($)</div>
-            <div class="help">Std roses $0.20–$0.30, premium $0.40–$0.60, hydrangea $1.50–$3.00</div>
+            <div class="label" data-i18n="calc.in.fob.l">Blended FOB price per stem ($)</div>
+            <div class="help" data-i18n="calc.in.fob.h">Std roses $0.20–$0.30, premium $0.40–$0.60, hydrangea $1.50–$3.00</div>
           </div>
           <input type="number" id="fob" value="0.25" min="0" step="0.01" />
         </div>
 
-        <div class="calc-section-title">2. Waste rate assumptions</div>
+        <div class="calc-section-title" data-i18n="calc.sect2">2. Waste rate assumptions</div>
 
         <div class="input-row">
           <div>
-            <div class="label">Baseline waste rate, without VCC (%)</div>
-            <div class="help">Industry typical: 5%–8% with forced-air cooling only</div>
+            <div class="label" data-i18n="calc.in.wb.l">Baseline waste rate, without VCC (%)</div>
+            <div class="help" data-i18n="calc.in.wb.h">Industry typical: 5%–8% with forced-air cooling only</div>
           </div>
           <input type="number" id="wasteBase" value="6.5" min="0" max="100" step="0.1" />
         </div>
 
         <div class="input-row">
           <div>
-            <div class="label">Waste rate with vacuum cooling (%)</div>
-            <div class="help">Industry typical: 1%–3% with proper pre-cooling</div>
+            <div class="label" data-i18n="calc.in.wv.l">Waste rate with vacuum cooling (%)</div>
+            <div class="help" data-i18n="calc.in.wv.h">Industry typical: 1%–3% with proper pre-cooling</div>
           </div>
           <input type="number" id="wasteVcc" value="2.0" min="0" max="100" step="0.1" />
         </div>
 
-        <div class="calc-section-title">3. Secondary savings</div>
+        <div class="calc-section-title" data-i18n="calc.sect3">3. Secondary savings</div>
 
         <div class="input-row">
           <div>
-            <div class="label">Importer claims reduction (% of revenue)</div>
-            <div class="help">Quality credits typically drop from 1.5–3% to 0.5–1%</div>
+            <div class="label" data-i18n="calc.in.cl.l">Importer claims reduction (% of revenue)</div>
+            <div class="help" data-i18n="calc.in.cl.h">Quality credits typically drop from 1.5–3% to 0.5–1%</div>
           </div>
           <input type="number" id="claimsPct" value="1.5" min="0" max="100" step="0.1" />
         </div>
 
         <div class="input-row">
           <div>
-            <div class="label">Grade retention captured (% of revenue)</div>
-            <div class="help">More A-grade retained; wider impact on premium varieties</div>
+            <div class="label" data-i18n="calc.in.gr.l">Grade retention captured (% of revenue)</div>
+            <div class="help" data-i18n="calc.in.gr.h">More A-grade retained; wider impact on premium varieties</div>
           </div>
           <input type="number" id="gradePct" value="1.5" min="0" max="100" step="0.1" />
         </div>
 
         <div class="input-row">
           <div>
-            <div class="label">Cold-room energy savings / month ($)</div>
-            <div class="help">~40–60% reduction in kWh per kg cooled</div>
+            <div class="label" data-i18n="calc.in.en.l">Cold-room energy savings / month ($)</div>
+            <div class="help" data-i18n="calc.in.en.h">~40–60% reduction in kWh per kg cooled</div>
           </div>
           <input type="number" id="energy" value="3500" min="0" step="100" />
         </div>
 
         <div class="input-row">
           <div>
-            <div class="label">Labor &amp; throughput savings / month ($)</div>
-            <div class="help">More cold-room turns, less rework, fewer hours per pallet</div>
+            <div class="label" data-i18n="calc.in.lab.l">Labor &amp; throughput savings / month ($)</div>
+            <div class="help" data-i18n="calc.in.lab.h">More cold-room turns, less rework, fewer hours per pallet</div>
           </div>
           <input type="number" id="labor" value="2500" min="0" step="100" />
         </div>
 
-        <div class="calc-section-title">4. Investment</div>
+        <div class="calc-section-title" data-i18n="calc.sect4">4. Investment</div>
 
         <div class="input-row">
           <div>
-            <div class="label">Vacuum cooling system cost ($)</div>
-            <div class="help">$180K–$250K typical for 50-ha class operations, installed</div>
+            <div class="label" data-i18n="calc.in.inv.l">Vacuum cooling system cost ($)</div>
+            <div class="help" data-i18n="calc.in.inv.h">$180K–$250K typical for 50-ha class operations, installed</div>
           </div>
           <input type="number" id="invest" value="220000" min="0" step="1000" />
         </div>
@@ -581,97 +602,97 @@
 
       <div class="calc-results">
 
-        <div class="calc-section-title">Production &amp; revenue</div>
+        <div class="calc-section-title" data-i18n="res.prod">Production &amp; revenue</div>
         <div class="result-row subdued">
-          <div class="label">Annual production (stems)</div>
+          <div class="label" data-i18n="res.annual">Annual production (stems)</div>
           <div class="value" id="annualStems">—</div>
         </div>
         <div class="result-row subdued">
-          <div class="label">Monthly production (stems)</div>
+          <div class="label" data-i18n="res.monthly">Monthly production (stems)</div>
           <div class="value" id="monthlyStems">—</div>
         </div>
         <div class="result-row">
-          <div class="label">Average monthly FOB revenue</div>
+          <div class="label" data-i18n="res.monthlyrev">Average monthly FOB revenue</div>
           <div class="value" id="monthlyRev">—</div>
         </div>
 
-        <div class="calc-section-title">Direct waste savings</div>
+        <div class="calc-section-title" data-i18n="res.directH">Direct waste savings</div>
         <div class="result-row subdued">
-          <div class="label">Reduction (percentage points)</div>
+          <div class="label" data-i18n="res.delta">Reduction (percentage points)</div>
           <div class="value" id="wasteDelta">—</div>
         </div>
         <div class="result-row subdued">
-          <div class="label">Stems recovered / month</div>
+          <div class="label" data-i18n="res.recovered">Stems recovered / month</div>
           <div class="value" id="stemsRecovered">—</div>
         </div>
         <div class="result-row headline">
-          <div class="label">Direct savings / month</div>
+          <div class="label" data-i18n="res.directMo">Direct savings / month</div>
           <div class="value" id="directMo">—</div>
         </div>
         <div class="result-row subdued">
-          <div class="label">Direct savings / year</div>
+          <div class="label" data-i18n="res.directYr">Direct savings / year</div>
           <div class="value" id="directYr">—</div>
         </div>
 
-        <div class="calc-section-title">Secondary savings (per month)</div>
+        <div class="calc-section-title" data-i18n="res.secH">Secondary savings (per month)</div>
         <div class="result-row subdued">
-          <div class="label">Importer claims reduction</div>
+          <div class="label" data-i18n="res.claims">Importer claims reduction</div>
           <div class="value" id="claimsMo">—</div>
         </div>
         <div class="result-row subdued">
-          <div class="label">Grade retention</div>
+          <div class="label" data-i18n="res.grade">Grade retention</div>
           <div class="value" id="gradeMo">—</div>
         </div>
         <div class="result-row subdued">
-          <div class="label">Cold-room energy</div>
+          <div class="label" data-i18n="res.energy">Cold-room energy</div>
           <div class="value" id="energyMo">—</div>
         </div>
         <div class="result-row subdued">
-          <div class="label">Labor &amp; throughput</div>
+          <div class="label" data-i18n="res.labor">Labor &amp; throughput</div>
           <div class="value" id="laborMo">—</div>
         </div>
         <div class="result-row">
-          <div class="label">Total secondary / month</div>
+          <div class="label" data-i18n="res.secMo">Total secondary / month</div>
           <div class="value" id="secondaryMo">—</div>
         </div>
 
-        <div class="calc-section-title">Total financial impact</div>
+        <div class="calc-section-title" data-i18n="res.totH">Total financial impact</div>
         <div class="result-row headline">
-          <div class="label">Total savings / month</div>
+          <div class="label" data-i18n="res.totMo">Total savings / month</div>
           <div class="value" id="totalMo">—</div>
         </div>
         <div class="result-row">
-          <div class="label">Total savings / year</div>
+          <div class="label" data-i18n="res.totYr">Total savings / year</div>
           <div class="value" id="totalYr">—</div>
         </div>
         <div class="result-row">
-          <div class="label">Total savings / 5 years</div>
+          <div class="label" data-i18n="res.tot5">Total savings / 5 years</div>
           <div class="value" id="total5">—</div>
         </div>
         <div class="result-row headline">
-          <div class="label">Net 5-year impact (after equipment)</div>
+          <div class="label" data-i18n="res.net5">Net 5-year impact (after equipment)</div>
           <div class="value" id="net5">—</div>
         </div>
         <div class="result-row subdued">
-          <div class="label">5-year ROI multiple</div>
+          <div class="label" data-i18n="res.roi">5-year ROI multiple</div>
           <div class="value" id="roiX">—</div>
         </div>
 
-        <div class="calc-section-title">Payback period</div>
+        <div class="calc-section-title" data-i18n="res.payH">Payback period</div>
         <div class="payback-cards">
           <div class="payback-card">
-            <div class="label">Direct savings only</div>
+            <div class="label" data-i18n="res.payDir">Direct savings only</div>
             <div class="value" id="paybackDirect">—</div>
-            <div class="sub">months to recover investment</div>
+            <div class="sub" data-i18n="res.paySub">months to recover investment</div>
           </div>
           <div class="payback-card">
-            <div class="label">Total savings</div>
+            <div class="label" data-i18n="res.payTot">Total savings</div>
             <div class="value" id="paybackTotal">—</div>
-            <div class="sub">months to recover investment</div>
+            <div class="sub" data-i18n="res.paySub2">months to recover investment</div>
           </div>
         </div>
 
-        <div class="calc-disclaimer">
+        <div class="calc-disclaimer" data-i18n="res.disc">
           Estimates only. Actual savings depend on variety mix, peak-season volume concentration, transit chain, and current cold-chain configuration. Request a site visit for a tailored model.
         </div>
       </div>
@@ -681,41 +702,41 @@
 
 <section id="methodology">
   <div class="container">
-    <div class="eyebrow">How the numbers work</div>
-    <h2>Methodology &amp; assumptions</h2>
-    <p class="section-lede">Every figure in the calculator traces back to a documented industry assumption or observed performance metric. Adjust any input to match your operation — the model is intentionally conservative.</p>
+    <div class="eyebrow" data-i18n="meth.eyebrow">How the numbers work</div>
+    <h2 data-i18n="meth.h2">Methodology &amp; assumptions</h2>
+    <p class="section-lede" data-i18n="meth.lede">Every figure in the calculator traces back to a documented industry assumption or observed performance metric. Adjust any input to match your operation — the model is intentionally conservative.</p>
     <div class="method-grid">
       <div class="method-card">
-        <h3>Yield per hectare</h3>
-        <p>1,000,000 stems/ha/yr is the standard reference for Colombian and Ecuadorian export rose operations. Carnations and chrysanthemums achieve higher density per hectare; hydrangea is substantially lower (100K–250K stems/ha) at much higher FOB.</p>
+        <h3 data-i18n="meth.c1.h">Yield per hectare</h3>
+        <p data-i18n="meth.c1.p">1,000,000 stems/ha/yr is the standard reference for Colombian and Ecuadorian export rose operations. Carnations and chrysanthemums achieve higher density per hectare; hydrangea is substantially lower (100K–250K stems/ha) at much higher FOB.</p>
       </div>
       <div class="method-card">
-        <h3>FOB price per stem</h3>
-        <p>$0.25 is a blended commodity-rose average. Premium roses run $0.40–$0.60, garden roses $0.80–$1.50, hydrangea $1.50–$3.00, carnations $0.08–$0.12. Model your variety mix accordingly.</p>
+        <h3 data-i18n="meth.c2.h">FOB price per stem</h3>
+        <p data-i18n="meth.c2.p">$0.25 is a blended commodity-rose average. Premium roses run $0.40–$0.60, garden roses $0.80–$1.50, hydrangea $1.50–$3.00, carnations $0.08–$0.12. Model your variety mix accordingly.</p>
       </div>
       <div class="method-card">
-        <h3>Baseline waste (without VCC)</h3>
-        <p>5%–8% reflects industry observation for operations relying on forced-air cooling rooms only. The 6.5% midpoint is the default; peak-season rates (Valentine's, Mother's Day) are typically higher as cold rooms over-load.</p>
+        <h3 data-i18n="meth.c3.h">Baseline waste (without VCC)</h3>
+        <p data-i18n="meth.c3.p">5%–8% reflects industry observation for operations relying on forced-air cooling rooms only. The 6.5% midpoint is the default; peak-season rates (Valentine's, Mother's Day) are typically higher as cold rooms over-load.</p>
       </div>
       <div class="method-card">
-        <h3>Post-VCC waste</h3>
-        <p>1%–3% reflects observed performance in farms running vacuum cooling on full export volume. The 2% midpoint is the default. Operations with high Botrytis pressure or long transit chains typically see larger gains.</p>
+        <h3 data-i18n="meth.c4.h">Post-VCC waste</h3>
+        <p data-i18n="meth.c4.p">1%–3% reflects observed performance in farms running vacuum cooling on full export volume. The 2% midpoint is the default. Operations with high Botrytis pressure or long transit chains typically see larger gains.</p>
       </div>
       <div class="method-card">
-        <h3>Importer claims</h3>
-        <p>Quality-related credits commonly run 1.5%–3% of FOB revenue and typically drop to 0.5%–1% post-VCC. The default models a 1.5 percentage-point reduction — conservative for premium operations.</p>
+        <h3 data-i18n="meth.c5.h">Importer claims</h3>
+        <p data-i18n="meth.c5.p">Quality-related credits commonly run 1.5%–3% of FOB revenue and typically drop to 0.5%–1% post-VCC. The default models a 1.5 percentage-point reduction — conservative for premium operations.</p>
       </div>
       <div class="method-card">
-        <h3>Grade retention</h3>
-        <p>Forced-air-only operations see 10%–15% of stems downgraded in transit. Vacuum cooling preserves grade for ~80%+ of these stems. Model premium operations at 2.0% to reflect wider A→B price differentials.</p>
+        <h3 data-i18n="meth.c6.h">Grade retention</h3>
+        <p data-i18n="meth.c6.p">Forced-air-only operations see 10%–15% of stems downgraded in transit. Vacuum cooling preserves grade for ~80%+ of these stems. Model premium operations at 2.0% to reflect wider A→B price differentials.</p>
       </div>
       <div class="method-card">
-        <h3>Energy savings</h3>
-        <p>Vacuum chambers consume more peak power for 20–30 minutes versus 12–24 hours of cold-room operation, reducing total kWh per kilogram of product cooled by 40%–60%.</p>
+        <h3 data-i18n="meth.c7.h">Energy savings</h3>
+        <p data-i18n="meth.c7.p">Vacuum chambers consume more peak power for 20–30 minutes versus 12–24 hours of cold-room operation, reducing total kWh per kilogram of product cooled by 40%–60%.</p>
       </div>
       <div class="method-card">
-        <h3>System investment</h3>
-        <p>$180K–$250K installed for commodity-class 50-ha operations; $200K–$280K for premium-class chambers with enhanced controls and gentler vacuum profiles. Final pricing depends on chamber size, controls, and site preparation.</p>
+        <h3 data-i18n="meth.c8.h">System investment</h3>
+        <p data-i18n="meth.c8.p">$180K–$250K installed for commodity-class 50-ha operations; $200K–$280K for premium-class chambers with enhanced controls and gentler vacuum profiles. Final pricing depends on chamber size, controls, and site preparation.</p>
       </div>
     </div>
   </div>
@@ -723,35 +744,35 @@
 
 <section id="cta">
   <div class="container">
-    <h2>Ready for a tailored ROI projection?</h2>
-    <p>The calculator gives you a directional answer. A site visit gives you a number you can put in front of your CFO. Vacuum Cooling Colombia builds a customized model from your 12 months of stem volume, current waste tracking, and claims history.</p>
+    <h2 data-i18n="cta.h2">Ready for a tailored ROI projection?</h2>
+    <p data-i18n="cta.p">The calculator gives you a directional answer. A site visit gives you a number you can put in front of your CFO. Vacuum Cooling Colombia builds a customized model from your 12 months of stem volume, current waste tracking, and claims history.</p>
     <div class="cta-buttons">
-      <a class="btn-primary" href="mailto:?subject=Vacuum%20Cooling%20Colombia%20%E2%80%94%20Site%20visit%20request&amp;body=Hello%20Mauricio%2C%0A%0AI%27d%20like%20to%20schedule%20a%20site%20visit%20and%20customized%20ROI%20projection%20for%20our%20operation.%0A%0AFarm%20name%3A%0AHectares%3A%0AVariety%20mix%3A%0ACurrent%20cold-chain%20setup%3A%0A%0AThanks%2C">Request a site visit</a>
-      <a class="btn-secondary" href="https://www.linkedin.com/in/mauricio-gleiser" target="_blank" rel="noopener">Connect on LinkedIn</a>
+      <a class="btn-primary" id="ctaMail" data-i18n="cta.btn1" href="#">Request a site visit</a>
+      <a class="btn-secondary" href="https://www.linkedin.com/in/mauricio-gleiser" target="_blank" rel="noopener" data-i18n="cta.btn2">Connect on LinkedIn</a>
     </div>
   </div>
 </section>
 
 <section id="about">
   <div class="container">
-    <div class="eyebrow">Who you're working with</div>
-    <h2>About Mauricio Gleiser</h2>
+    <div class="eyebrow" data-i18n="about.eyebrow">Who you're working with</div>
+    <h2 data-i18n="about.h2">About Mauricio Gleiser</h2>
     <div class="about-grid">
       <div>
-        <p style="font-size:16px; color: var(--ink-soft);">Mauricio Gleiser is the Founder and Managing Partner of Vacuum Cooling Colombia SAS, a pioneer in vacuum cooling technology for Colombia's cut-flower export industry. A mechanical engineer trained at Universidad Nacional de Ingeniería in Lima, Peru, Mauricio has spent more than two decades introducing and refining vacuum cooling for fresh-cut flowers — beginning with the first commercial vacuum cooling operation at Bogotá's cargo terminal in 2001.</p>
-        <p style="font-size:16px; color: var(--ink-soft);">Today, Vacuum Cooling Colombia operates ICA-approved origin inspection facilities in Funza (Bogotá) and Rionegro (Medellín), serving florists, importers, producers, and large retailers across the United States, Europe, and Japan. Mauricio is an active member of PMA (Produce Marketing Association) and WFFSA (Wholesale Florist &amp; Florist Supplier Association), and a founding member of Colombia's Certified Cold Chain Alliance.</p>
-        <p style="font-size:16px; color: var(--ink-soft);">He writes and speaks frequently on cold-chain integrity, sustainable maritime export of cut flowers, and the role of pre-shipment cooling in protecting product quality and reducing post-harvest waste.</p>
+        <p style="font-size:16px; color: var(--ink-soft);" data-i18n="about.p1">Mauricio Gleiser is the Founder and Managing Partner of Vacuum Cooling Colombia SAS, a pioneer in vacuum cooling technology for Colombia's cut-flower export industry. A mechanical engineer trained at Universidad Nacional de Ingeniería in Lima, Peru, Mauricio has spent more than two decades introducing and refining vacuum cooling for fresh-cut flowers — beginning with the first commercial vacuum cooling operation at Bogotá's cargo terminal in 2001.</p>
+        <p style="font-size:16px; color: var(--ink-soft);" data-i18n="about.p2">Today, Vacuum Cooling Colombia operates ICA-approved origin inspection facilities in Funza (Bogotá) and Rionegro (Medellín), serving florists, importers, producers, and large retailers across the United States, Europe, and Japan. Mauricio is an active member of PMA (Produce Marketing Association) and WFFSA (Wholesale Florist &amp; Florist Supplier Association), and a founding member of Colombia's Certified Cold Chain Alliance.</p>
+        <p style="font-size:16px; color: var(--ink-soft);" data-i18n="about.p3">He writes and speaks frequently on cold-chain integrity, sustainable maritime export of cut flowers, and the role of pre-shipment cooling in protecting product quality and reducing post-harvest waste.</p>
       </div>
       <div class="contact-card">
         <h3>Mauricio Gleiser</h3>
-        <div class="role">Managing Partner, Vacuum Cooling Colombia SAS</div>
+        <div class="role" data-i18n="about.role">Managing Partner, Vacuum Cooling Colombia SAS</div>
         <ul class="contact-list">
-          <li><strong>Website:</strong> <a href="https://vacuumcoolingcolombia.com" target="_blank" rel="noopener">vacuumcoolingcolombia.com</a></li>
+          <li><strong data-i18n="about.web">Website:</strong> <a href="https://vacuumcoolingcolombia.com" target="_blank" rel="noopener">vacuumcoolingcolombia.com</a></li>
           <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/mauricio-gleiser" target="_blank" rel="noopener">/in/mauricio-gleiser</a></li>
-          <li><strong>Response:</strong> Within 24 hours for qualified inquiries</li>
+          <li><strong data-i18n="about.resp">Response:</strong> <span data-i18n="about.respval">Within 24 hours for qualified inquiries</span></li>
         </ul>
         <div class="facilities">
-          <h4>Facilities</h4>
+          <h4 data-i18n="about.fac">Facilities</h4>
           <div class="facility">
             <strong>Rionegro, Antioquia (MDE)</strong><br/>
             Variante Las Palmas – Aeropuerto José María Córdoba<br/>
@@ -775,25 +796,347 @@
 
 <footer class="site">
   <div class="container">
-    &copy; <span id="year"></span> Vacuum Cooling Colombia SAS &nbsp;·&nbsp; All figures are conservative estimates based on industry benchmarks. Confidential — for prospective client use.
+    <span data-i18n="footer.txt">&copy; <span id="year"></span> Vacuum Cooling Colombia SAS &nbsp;·&nbsp; All figures are conservative estimates based on industry benchmarks. Confidential — for prospective client use.</span>
   </div>
 </footer>
 
 <script>
-  // Format helpers
-  const fmtUSD0 = n => isFinite(n) ? '$' + Math.round(n).toLocaleString('en-US') : '—';
-  const fmtUSD = n => isFinite(n) ? '$' + Math.round(n).toLocaleString('en-US') : '—';
-  const fmtNum0 = n => isFinite(n) ? Math.round(n).toLocaleString('en-US') : '—';
-  const fmtPP = n => isFinite(n) ? n.toFixed(1) + ' pp' : '—';
-  const fmtMo = n => isFinite(n) && n > 0 ? n.toFixed(1) + ' mo' : '—';
-  const fmtX = n => isFinite(n) && n > 0 ? n.toFixed(1) + 'x' : '—';
+  // ---------- Translations ----------
+  const TR = {
+    en: {
+      "meta.title": "Vacuum Cooling Colombia — ROI Calculator",
+      "meta.desc": "See how much vacuum cooling can save your cut-flower export operation. Interactive ROI calculator from Vacuum Cooling Colombia.",
+      "nav.problem": "The Problem",
+      "nav.calculator": "ROI Calculator",
+      "nav.methodology": "Methodology",
+      "nav.about": "About",
+      "nav.cta": "Request Site Visit",
 
-  const inputs = ['hectares','yield','fob','wasteBase','wasteVcc','claimsPct','gradePct','energy','labor','invest'];
+      "hero.h1": "See exactly how much your farm loses to inadequate pre-cooling — and how fast vacuum cooling pays it back.",
+      "hero.lede": "For a typical 50-hectare cut-flower export operation, vacuum cooling cuts post-harvest waste from 5–8% to 1–3% of shipped volume. That recovers roughly $1 million per year in revenue and pays for the equipment in under five months. Adjust the calculator below to model your operation.",
+      "hero.stat1.label": "Direct waste cut",
+      "hero.stat1.value": "4.5 pp",
+      "hero.stat1.sub": "From 6.5% baseline to 2% with VCC",
+      "hero.stat2.label": "Typical monthly savings",
+      "hero.stat2.value": "$83.5K",
+      "hero.stat2.sub": "Direct + secondary, 50-ha standard farm",
+      "hero.stat3.label": "Payback (total savings)",
+      "hero.stat3.value": "~2.6 mo",
+      "hero.stat3.sub": "On a $220K installed system",
+      "hero.stat4.label": "5-year net impact",
+      "hero.stat4.value": "$4.79M",
+      "hero.stat4.sub": "Cumulative savings minus investment",
 
-  function num(id) {
-    const v = parseFloat(document.getElementById(id).value);
-    return isFinite(v) ? v : 0;
+      "problem.eyebrow": "Why pre-cooling matters",
+      "problem.h2": "The hidden cost of forced-air cooling alone",
+      "problem.lede": "Cut flowers entering the cold chain with residual field heat or surface moisture face a documented set of risks — even when reefer containers run at 1°C and 80% RH. Operators relying solely on forced-air cooling rooms consistently lose 5–8% of shipped volume to these mechanisms.",
+      "problem.c1.h": "Botrytis germination",
+      "problem.c1.p": "Free water on petals at 1°C creates ideal germination conditions. Botrytis cinerea is the leading cause of arrival-quality claims and rejected pallets.",
+      "problem.c2.h": "Microclimate hot spots",
+      "problem.c2.p": "Inside cartons, local humidity can hit 100% and respiration accelerates — especially in pallet cores that take 12–24 hours to fully reach target temperature.",
+      "problem.c3.h": "Freezing damage",
+      "problem.c3.p": "Residual droplets contacting sub-zero evaporator surfaces cause localized freezing, water-soaking, translucent petals, and browning.",
+      "problem.c4.h": "Grade downgrades",
+      "problem.c4.p": "Cosmetic and vase-life issues drop A-grade stems to B-grade in transit, eroding FOB pricing — and the gap is widest on premium varieties.",
+      "problem.c5.h": "Importer claims",
+      "problem.c5.p": "Quality-related credits typically run 1.5–3% of FOB revenue. Premium importers apply tighter tolerances and faster claims processes.",
+      "problem.c6.h": "Shortened vase life",
+      "problem.c6.p": "Accelerated ethylene production means rejections at retail and credits back to the grower — costs that compound across the season.",
+
+      "calc.eyebrow": "Interactive ROI calculator",
+      "calc.h2": "Model your operation",
+      "calc.lede": "Adjust the inputs on the left to match your farm. Results update instantly. Defaults reflect a 50-hectare commodity rose operation; use the presets for premium specialty growers or large multi-farm groups.",
+      "calc.preset.label": "Quick presets:",
+      "calc.preset.commodity": "Commodity (50 ha, $0.25 FOB)",
+      "calc.preset.premium": "Premium (50 ha, $0.50 FOB)",
+      "calc.preset.hydrangea": "Hydrangea (25 ha, $2.00 FOB)",
+      "calc.sect1": "1. Production inputs",
+      "calc.sect2": "2. Waste rate assumptions",
+      "calc.sect3": "3. Secondary savings",
+      "calc.sect4": "4. Investment",
+      "calc.in.hectares.l": "Cultivated area (hectares)",
+      "calc.in.hectares.h": "Total hectares of cut-flower production",
+      "calc.in.yield.l": "Annual yield (stems per hectare)",
+      "calc.in.yield.h": "Industry standard for export roses; carnations/mums vary",
+      "calc.in.fob.l": "Blended FOB price per stem ($)",
+      "calc.in.fob.h": "Std roses $0.20–$0.30, premium $0.40–$0.60, hydrangea $1.50–$3.00",
+      "calc.in.wb.l": "Baseline waste rate, without VCC (%)",
+      "calc.in.wb.h": "Industry typical: 5%–8% with forced-air cooling only",
+      "calc.in.wv.l": "Waste rate with vacuum cooling (%)",
+      "calc.in.wv.h": "Industry typical: 1%–3% with proper pre-cooling",
+      "calc.in.cl.l": "Importer claims reduction (% of revenue)",
+      "calc.in.cl.h": "Quality credits typically drop from 1.5–3% to 0.5–1%",
+      "calc.in.gr.l": "Grade retention captured (% of revenue)",
+      "calc.in.gr.h": "More A-grade retained; wider impact on premium varieties",
+      "calc.in.en.l": "Cold-room energy savings / month ($)",
+      "calc.in.en.h": "~40–60% reduction in kWh per kg cooled",
+      "calc.in.lab.l": "Labor & throughput savings / month ($)",
+      "calc.in.lab.h": "More cold-room turns, less rework, fewer hours per pallet",
+      "calc.in.inv.l": "Vacuum cooling system cost ($)",
+      "calc.in.inv.h": "$180K–$250K typical for 50-ha class operations, installed",
+
+      "res.prod": "Production & revenue",
+      "res.annual": "Annual production (stems)",
+      "res.monthly": "Monthly production (stems)",
+      "res.monthlyrev": "Average monthly FOB revenue",
+      "res.directH": "Direct waste savings",
+      "res.delta": "Reduction (percentage points)",
+      "res.recovered": "Stems recovered / month",
+      "res.directMo": "Direct savings / month",
+      "res.directYr": "Direct savings / year",
+      "res.secH": "Secondary savings (per month)",
+      "res.claims": "Importer claims reduction",
+      "res.grade": "Grade retention",
+      "res.energy": "Cold-room energy",
+      "res.labor": "Labor & throughput",
+      "res.secMo": "Total secondary / month",
+      "res.totH": "Total financial impact",
+      "res.totMo": "Total savings / month",
+      "res.totYr": "Total savings / year",
+      "res.tot5": "Total savings / 5 years",
+      "res.net5": "Net 5-year impact (after equipment)",
+      "res.roi": "5-year ROI multiple",
+      "res.payH": "Payback period",
+      "res.payDir": "Direct savings only",
+      "res.payTot": "Total savings",
+      "res.paySub": "months to recover investment",
+      "res.paySub2": "months to recover investment",
+      "res.disc": "Estimates only. Actual savings depend on variety mix, peak-season volume concentration, transit chain, and current cold-chain configuration. Request a site visit for a tailored model.",
+
+      "meth.eyebrow": "How the numbers work",
+      "meth.h2": "Methodology & assumptions",
+      "meth.lede": "Every figure in the calculator traces back to a documented industry assumption or observed performance metric. Adjust any input to match your operation — the model is intentionally conservative.",
+      "meth.c1.h": "Yield per hectare",
+      "meth.c1.p": "1,000,000 stems/ha/yr is the standard reference for Colombian and Ecuadorian export rose operations. Carnations and chrysanthemums achieve higher density per hectare; hydrangea is substantially lower (100K–250K stems/ha) at much higher FOB.",
+      "meth.c2.h": "FOB price per stem",
+      "meth.c2.p": "$0.25 is a blended commodity-rose average. Premium roses run $0.40–$0.60, garden roses $0.80–$1.50, hydrangea $1.50–$3.00, carnations $0.08–$0.12. Model your variety mix accordingly.",
+      "meth.c3.h": "Baseline waste (without VCC)",
+      "meth.c3.p": "5%–8% reflects industry observation for operations relying on forced-air cooling rooms only. The 6.5% midpoint is the default; peak-season rates (Valentine's, Mother's Day) are typically higher as cold rooms over-load.",
+      "meth.c4.h": "Post-VCC waste",
+      "meth.c4.p": "1%–3% reflects observed performance in farms running vacuum cooling on full export volume. The 2% midpoint is the default. Operations with high Botrytis pressure or long transit chains typically see larger gains.",
+      "meth.c5.h": "Importer claims",
+      "meth.c5.p": "Quality-related credits commonly run 1.5%–3% of FOB revenue and typically drop to 0.5%–1% post-VCC. The default models a 1.5 percentage-point reduction — conservative for premium operations.",
+      "meth.c6.h": "Grade retention",
+      "meth.c6.p": "Forced-air-only operations see 10%–15% of stems downgraded in transit. Vacuum cooling preserves grade for ~80%+ of these stems. Model premium operations at 2.0% to reflect wider A→B price differentials.",
+      "meth.c7.h": "Energy savings",
+      "meth.c7.p": "Vacuum chambers consume more peak power for 20–30 minutes versus 12–24 hours of cold-room operation, reducing total kWh per kilogram of product cooled by 40%–60%.",
+      "meth.c8.h": "System investment",
+      "meth.c8.p": "$180K–$250K installed for commodity-class 50-ha operations; $200K–$280K for premium-class chambers with enhanced controls and gentler vacuum profiles. Final pricing depends on chamber size, controls, and site preparation.",
+
+      "cta.h2": "Ready for a tailored ROI projection?",
+      "cta.p": "The calculator gives you a directional answer. A site visit gives you a number you can put in front of your CFO. Vacuum Cooling Colombia builds a customized model from your 12 months of stem volume, current waste tracking, and claims history.",
+      "cta.btn1": "Request a site visit",
+      "cta.btn2": "Connect on LinkedIn",
+      "cta.mailSubj": "Vacuum Cooling Colombia — Site visit request",
+      "cta.mailBody": "Hello Mauricio,\n\nI'd like to schedule a site visit and customized ROI projection for our operation.\n\nFarm name:\nHectares:\nVariety mix:\nCurrent cold-chain setup:\n\nThanks,",
+
+      "about.eyebrow": "Who you're working with",
+      "about.h2": "About Mauricio Gleiser",
+      "about.p1": "Mauricio Gleiser is the Founder and Managing Partner of Vacuum Cooling Colombia SAS, a pioneer in vacuum cooling technology for Colombia's cut-flower export industry. A mechanical engineer trained at Universidad Nacional de Ingeniería in Lima, Peru, Mauricio has spent more than two decades introducing and refining vacuum cooling for fresh-cut flowers — beginning with the first commercial vacuum cooling operation at Bogotá's cargo terminal in 2001.",
+      "about.p2": "Today, Vacuum Cooling Colombia operates ICA-approved origin inspection facilities in Funza (Bogotá) and Rionegro (Medellín), serving florists, importers, producers, and large retailers across the United States, Europe, and Japan. Mauricio is an active member of PMA (Produce Marketing Association) and WFFSA (Wholesale Florist & Florist Supplier Association), and a founding member of Colombia's Certified Cold Chain Alliance.",
+      "about.p3": "He writes and speaks frequently on cold-chain integrity, sustainable maritime export of cut flowers, and the role of pre-shipment cooling in protecting product quality and reducing post-harvest waste.",
+      "about.role": "Managing Partner, Vacuum Cooling Colombia SAS",
+      "about.web": "Website:",
+      "about.resp": "Response:",
+      "about.respval": "Within 24 hours for qualified inquiries",
+      "about.fac": "Facilities",
+
+      "footer.txt": "© __YEAR__ Vacuum Cooling Colombia SAS  ·  All figures are conservative estimates based on industry benchmarks. Confidential — for prospective client use."
+    },
+    es: {
+      "meta.title": "Vacuum Cooling Colombia — Calculadora de ROI",
+      "meta.desc": "Vea cuánto puede ahorrar el enfriamiento al vacío en su operación de exportación de flores de corte. Calculadora interactiva de ROI de Vacuum Cooling Colombia.",
+      "nav.problem": "El Problema",
+      "nav.calculator": "Calculadora ROI",
+      "nav.methodology": "Metodología",
+      "nav.about": "Quiénes Somos",
+      "nav.cta": "Solicitar visita técnica",
+
+      "hero.h1": "Vea con precisión cuánto pierde su finca por un pre-enfriamiento inadecuado, y en cuánto tiempo el enfriamiento al vacío recupera la inversión.",
+      "hero.lede": "Para una operación típica de exportación de flores de corte de 50 hectáreas, el enfriamiento al vacío reduce la merma poscosecha del 5–8% al 1–3% del volumen embarcado. Esto recupera aproximadamente USD 1 millón al año en ingresos y paga el equipo en menos de cinco meses. Ajuste la calculadora a continuación para modelar su operación.",
+      "hero.stat1.label": "Reducción directa de merma",
+      "hero.stat1.value": "4,5 pp",
+      "hero.stat1.sub": "De 6,5% base a 2% con VCC",
+      "hero.stat2.label": "Ahorro mensual típico",
+      "hero.stat2.value": "USD 83,5K",
+      "hero.stat2.sub": "Directo + secundario, finca estándar de 50 ha",
+      "hero.stat3.label": "Recuperación (ahorro total)",
+      "hero.stat3.value": "~2,6 meses",
+      "hero.stat3.sub": "Sobre un sistema instalado de USD 220K",
+      "hero.stat4.label": "Impacto neto a 5 años",
+      "hero.stat4.value": "USD 4,79M",
+      "hero.stat4.sub": "Ahorro acumulado menos inversión",
+
+      "problem.eyebrow": "Por qué importa el pre-enfriamiento",
+      "problem.h2": "El costo oculto de usar solo aire forzado",
+      "problem.lede": "Las flores de corte que entran a la cadena de frío con calor de campo residual o humedad superficial enfrentan un conjunto documentado de riesgos, incluso cuando los contenedores reefer operan a 1°C y 80% de humedad relativa. Las operaciones que dependen únicamente de cuartos fríos de aire forzado pierden constantemente entre el 5% y el 8% del volumen embarcado por estos mecanismos.",
+      "problem.c1.h": "Germinación de Botrytis",
+      "problem.c1.p": "El agua libre sobre los pétalos a 1°C genera condiciones ideales de germinación. Botrytis cinerea es la principal causa de reclamos por calidad en destino y de pallets rechazados.",
+      "problem.c2.h": "Microclimas críticos",
+      "problem.c2.p": "Dentro de las cajas, la humedad local puede alcanzar el 100% y la respiración se acelera, especialmente en el centro del pallet, que tarda entre 12 y 24 horas en llegar a la temperatura objetivo.",
+      "problem.c3.h": "Daño por congelamiento",
+      "problem.c3.p": "Las gotas residuales que tocan superficies de evaporadores bajo cero causan congelamiento localizado, encharcamiento, pétalos translúcidos y oscurecimiento.",
+      "problem.c4.h": "Pérdida de grado",
+      "problem.c4.p": "Problemas estéticos y de vida en florero degradan tallos de grado A a grado B durante el tránsito, erosionando el precio FOB — y la brecha es más amplia en variedades premium.",
+      "problem.c5.h": "Reclamos de importadores",
+      "problem.c5.p": "Los créditos por problemas de calidad suelen representar entre el 1,5% y el 3% del ingreso FOB. Los importadores premium aplican tolerancias más estrictas y procesos de reclamo más rápidos.",
+      "problem.c6.h": "Menor vida en florero",
+      "problem.c6.p": "La producción acelerada de etileno genera rechazos en el punto de venta y créditos al productor — costos que se acumulan a lo largo de la temporada.",
+
+      "calc.eyebrow": "Calculadora interactiva de ROI",
+      "calc.h2": "Modele su operación",
+      "calc.lede": "Ajuste los datos a la izquierda para reflejar su finca. Los resultados se actualizan al instante. Los valores por defecto corresponden a una operación de rosa estándar de 50 hectáreas; use las predeterminadas para productores de variedades premium o grupos multi-finca.",
+      "calc.preset.label": "Predeterminadas:",
+      "calc.preset.commodity": "Estándar (50 ha, USD 0,25 FOB)",
+      "calc.preset.premium": "Premium (50 ha, USD 0,50 FOB)",
+      "calc.preset.hydrangea": "Hortensia (25 ha, USD 2,00 FOB)",
+      "calc.sect1": "1. Datos de producción",
+      "calc.sect2": "2. Supuestos de tasa de merma",
+      "calc.sect3": "3. Ahorros secundarios",
+      "calc.sect4": "4. Inversión",
+      "calc.in.hectares.l": "Área cultivada (hectáreas)",
+      "calc.in.hectares.h": "Hectáreas totales en producción de flores de corte",
+      "calc.in.yield.l": "Rendimiento anual (tallos por hectárea)",
+      "calc.in.yield.h": "Estándar de la industria para rosa de exportación; clavel y crisantemo varían",
+      "calc.in.fob.l": "Precio FOB promedio por tallo (USD)",
+      "calc.in.fob.h": "Rosa estándar USD 0,20–0,30; premium USD 0,40–0,60; hortensia USD 1,50–3,00",
+      "calc.in.wb.l": "Tasa de merma base, sin VCC (%)",
+      "calc.in.wb.h": "Típico de la industria: 5%–8% solo con aire forzado",
+      "calc.in.wv.l": "Tasa de merma con enfriamiento al vacío (%)",
+      "calc.in.wv.h": "Típico de la industria: 1%–3% con pre-enfriamiento adecuado",
+      "calc.in.cl.l": "Reducción de reclamos de importadores (% del ingreso)",
+      "calc.in.cl.h": "Los créditos por calidad suelen bajar de 1,5–3% a 0,5–1%",
+      "calc.in.gr.l": "Retención de grado capturada (% del ingreso)",
+      "calc.in.gr.h": "Más tallos grado A retenidos; mayor impacto en variedades premium",
+      "calc.in.en.l": "Ahorro de energía en cuarto frío / mes (USD)",
+      "calc.in.en.h": "~40–60% de reducción en kWh por kg enfriado",
+      "calc.in.lab.l": "Ahorro en mano de obra y rotación / mes (USD)",
+      "calc.in.lab.h": "Más rotaciones del cuarto frío, menos reproceso, menos horas por pallet",
+      "calc.in.inv.l": "Costo del sistema de enfriamiento al vacío (USD)",
+      "calc.in.inv.h": "USD 180K–250K típico para operaciones clase 50 ha, instalado",
+
+      "res.prod": "Producción e ingresos",
+      "res.annual": "Producción anual (tallos)",
+      "res.monthly": "Producción mensual (tallos)",
+      "res.monthlyrev": "Ingreso FOB promedio mensual",
+      "res.directH": "Ahorro directo por merma",
+      "res.delta": "Reducción (puntos porcentuales)",
+      "res.recovered": "Tallos recuperados / mes",
+      "res.directMo": "Ahorro directo / mes",
+      "res.directYr": "Ahorro directo / año",
+      "res.secH": "Ahorros secundarios (por mes)",
+      "res.claims": "Reducción de reclamos de importadores",
+      "res.grade": "Retención de grado",
+      "res.energy": "Energía del cuarto frío",
+      "res.labor": "Mano de obra y rotación",
+      "res.secMo": "Total secundario / mes",
+      "res.totH": "Impacto financiero total",
+      "res.totMo": "Ahorro total / mes",
+      "res.totYr": "Ahorro total / año",
+      "res.tot5": "Ahorro total / 5 años",
+      "res.net5": "Impacto neto a 5 años (después del equipo)",
+      "res.roi": "Múltiplo ROI a 5 años",
+      "res.payH": "Período de recuperación",
+      "res.payDir": "Solo ahorro directo",
+      "res.payTot": "Ahorro total",
+      "res.paySub": "meses para recuperar la inversión",
+      "res.paySub2": "meses para recuperar la inversión",
+      "res.disc": "Solo estimaciones. Los ahorros reales dependen de la mezcla de variedades, la concentración de volumen en temporada alta, la cadena de tránsito y la configuración actual de la cadena de frío. Solicite una visita técnica para un modelo personalizado.",
+
+      "meth.eyebrow": "Cómo funcionan las cifras",
+      "meth.h2": "Metodología y supuestos",
+      "meth.lede": "Cada cifra de la calculadora se basa en un supuesto documentado de la industria o en una métrica de desempeño observada. Ajuste cualquier dato para que refleje su operación — el modelo es intencionalmente conservador.",
+      "meth.c1.h": "Rendimiento por hectárea",
+      "meth.c1.p": "1.000.000 de tallos/ha/año es la referencia estándar para operaciones de rosa de exportación en Colombia y Ecuador. Clavel y crisantemo alcanzan mayor densidad por hectárea; la hortensia es sustancialmente menor (100K–250K tallos/ha) con FOB mucho más alto.",
+      "meth.c2.h": "Precio FOB por tallo",
+      "meth.c2.p": "USD 0,25 es un promedio mezclado para rosa estándar. Rosa premium oscila entre USD 0,40–0,60; rosa de jardín USD 0,80–1,50; hortensia USD 1,50–3,00; clavel USD 0,08–0,12. Modele su mezcla de variedades en consecuencia.",
+      "meth.c3.h": "Merma base (sin VCC)",
+      "meth.c3.p": "5%–8% refleja la observación de la industria para operaciones que dependen únicamente de cuartos fríos de aire forzado. El 6,5% intermedio es el valor por defecto; las tasas en temporada alta (San Valentín, Día de la Madre) suelen ser más altas cuando los cuartos fríos se saturan.",
+      "meth.c4.h": "Merma con VCC",
+      "meth.c4.p": "1%–3% refleja el desempeño observado en fincas que aplican enfriamiento al vacío sobre el volumen total de exportación. El 2% intermedio es el valor por defecto. Operaciones con alta presión de Botrytis o cadenas de tránsito largas suelen ver mejoras mayores.",
+      "meth.c5.h": "Reclamos de importadores",
+      "meth.c5.p": "Los créditos por calidad suelen ser del 1,5%–3% del ingreso FOB y bajan al 0,5%–1% tras instalar VCC. El valor por defecto modela una reducción de 1,5 puntos porcentuales — conservador para operaciones premium.",
+      "meth.c6.h": "Retención de grado",
+      "meth.c6.p": "Las operaciones que solo usan aire forzado ven entre el 10% y el 15% de tallos degradados en tránsito. El enfriamiento al vacío preserva el grado en ~80%+ de esos tallos. Modele operaciones premium al 2,0% para reflejar el mayor diferencial de precio entre A y B.",
+      "meth.c7.h": "Ahorro de energía",
+      "meth.c7.p": "Las cámaras de vacío consumen más potencia pico durante 20–30 minutos frente a 12–24 horas de operación de cuarto frío, reduciendo el total de kWh por kilogramo de producto enfriado entre 40%–60%.",
+      "meth.c8.h": "Inversión del sistema",
+      "meth.c8.p": "USD 180K–250K instalado para operaciones clase estándar de 50 ha; USD 200K–280K para cámaras clase premium con controles mejorados y perfiles de vacío más suaves. El precio final depende del tamaño de la cámara, los controles y la preparación del sitio.",
+
+      "cta.h2": "¿Listo para una proyección de ROI personalizada?",
+      "cta.p": "La calculadora le da una respuesta orientativa. Una visita técnica le da una cifra que puede presentar a su CFO. Vacuum Cooling Colombia construye un modelo personalizado a partir de sus últimos 12 meses de volumen de tallos, su seguimiento de mermas actual y su historial de reclamos.",
+      "cta.btn1": "Solicitar una visita técnica",
+      "cta.btn2": "Conectar en LinkedIn",
+      "cta.mailSubj": "Vacuum Cooling Colombia — Solicitud de visita técnica",
+      "cta.mailBody": "Hola Mauricio,\n\nMe gustaría agendar una visita técnica y una proyección de ROI personalizada para nuestra operación.\n\nNombre de la finca:\nHectáreas:\nMezcla de variedades:\nConfiguración actual de cadena de frío:\n\nGracias,",
+
+      "about.eyebrow": "Con quién está trabajando",
+      "about.h2": "Sobre Mauricio Gleiser",
+      "about.p1": "Mauricio Gleiser es Fundador y Socio Director de Vacuum Cooling Colombia SAS, pionero en tecnología de enfriamiento al vacío para la industria de exportación de flores de corte de Colombia. Ingeniero mecánico formado en la Universidad Nacional de Ingeniería de Lima, Perú, Mauricio ha dedicado más de dos décadas a introducir y perfeccionar el enfriamiento al vacío para flores de corte frescas — comenzando con la primera operación comercial de enfriamiento al vacío en la terminal de carga de Bogotá en 2001.",
+      "about.p2": "Hoy, Vacuum Cooling Colombia opera centros de inspección de origen aprobados por el ICA en Funza (Bogotá) y Rionegro (Medellín), atendiendo a floristas, importadores, productores y grandes minoristas en Estados Unidos, Europa y Japón. Mauricio es miembro activo de PMA (Produce Marketing Association) y WFFSA (Wholesale Florist & Florist Supplier Association), y miembro fundador de la Alianza de Cadena de Frío Certificada de Colombia.",
+      "about.p3": "Escribe y habla frecuentemente sobre integridad de la cadena de frío, exportación marítima sostenible de flores de corte y el papel del pre-enfriamiento en la protección de la calidad del producto y la reducción de mermas poscosecha.",
+      "about.role": "Socio Director, Vacuum Cooling Colombia SAS",
+      "about.web": "Sitio web:",
+      "about.resp": "Respuesta:",
+      "about.respval": "En menos de 24 horas para consultas calificadas",
+      "about.fac": "Instalaciones",
+
+      "footer.txt": "© __YEAR__ Vacuum Cooling Colombia SAS  ·  Todas las cifras son estimaciones conservadoras basadas en benchmarks de la industria. Confidencial — para uso de clientes prospectivos."
+    }
+  };
+
+  // ---------- Number formatters per locale ----------
+  let CURRENT_LANG = 'en';
+  const localeOf = lang => lang === 'es' ? 'es-CO' : 'en-US';
+  const fmtUSD = n => isFinite(n)
+    ? (CURRENT_LANG === 'es' ? 'USD ' : '$') + Math.round(n).toLocaleString(localeOf(CURRENT_LANG))
+    : '—';
+  const fmtNum0 = n => isFinite(n) ? Math.round(n).toLocaleString(localeOf(CURRENT_LANG)) : '—';
+  const fmtPP = n => isFinite(n) ? n.toLocaleString(localeOf(CURRENT_LANG), {minimumFractionDigits:1, maximumFractionDigits:1}) + ' pp' : '—';
+  const fmtMo = n => isFinite(n) && n > 0
+    ? n.toLocaleString(localeOf(CURRENT_LANG), {minimumFractionDigits:1, maximumFractionDigits:1}) + (CURRENT_LANG === 'es' ? ' meses' : ' mo')
+    : '—';
+  const fmtX = n => isFinite(n) && n > 0
+    ? n.toLocaleString(localeOf(CURRENT_LANG), {minimumFractionDigits:1, maximumFractionDigits:1}) + 'x'
+    : '—';
+
+  // ---------- Apply translations ----------
+  function applyLang(lang) {
+    if (!TR[lang]) lang = 'en';
+    CURRENT_LANG = lang;
+    document.documentElement.lang = lang === 'es' ? 'es-CO' : 'en';
+    const dict = TR[lang];
+    const year = new Date().getFullYear();
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const val = dict[key];
+      if (val == null) return;
+      const attr = el.getAttribute('data-i18n-attr');
+      const text = val.replace('__YEAR__', year);
+      if (attr) el.setAttribute(attr, text);
+      else el.textContent = text;
+    });
+
+    // Mailto link
+    const mail = document.getElementById('ctaMail');
+    if (mail) {
+      mail.href = 'mailto:?subject=' + encodeURIComponent(dict['cta.mailSubj']) +
+                  '&body=' + encodeURIComponent(dict['cta.mailBody']);
+    }
+
+    // Toggle active state on language buttons
+    document.querySelectorAll('.lang-switch button').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+
+    try { localStorage.setItem('vcc_lang', lang); } catch(e) {}
+    recalc();
   }
+
+  // ---------- Calculator ----------
+  const inputs = ['hectares','yield','fob','wasteBase','wasteVcc','claimsPct','gradePct','energy','labor','invest'];
+  function num(id) { const v = parseFloat(document.getElementById(id).value); return isFinite(v) ? v : 0; }
 
   function recalc() {
     const hectares = num('hectares');
@@ -810,55 +1153,44 @@
     const annualStems = hectares * yieldPerHa;
     const monthlyStems = annualStems / 12;
     const monthlyRev = monthlyStems * fob;
-
     const wasteDelta = (wBase - wVcc) * 100;
     const stemsRecovered = monthlyStems * (wBase - wVcc);
     const directMo = stemsRecovered * fob;
     const directYr = directMo * 12;
-
     const claimsMo = monthlyRev * claimsPct;
     const gradeMo = monthlyRev * gradePct;
-    const energyMo = energy;
-    const laborMo = labor;
-    const secondaryMo = claimsMo + gradeMo + energyMo + laborMo;
-
+    const secondaryMo = claimsMo + gradeMo + energy + labor;
     const totalMo = directMo + secondaryMo;
     const totalYr = totalMo * 12;
     const total5 = totalYr * 5;
     const net5 = total5 - invest;
     const roiX = invest > 0 ? total5 / invest : NaN;
-
     const paybackDirect = directMo > 0 ? invest / directMo : NaN;
     const paybackTotal = totalMo > 0 ? invest / totalMo : NaN;
 
-    document.getElementById('annualStems').textContent = fmtNum0(annualStems);
-    document.getElementById('monthlyStems').textContent = fmtNum0(monthlyStems);
-    document.getElementById('monthlyRev').textContent = fmtUSD(monthlyRev);
-
-    document.getElementById('wasteDelta').textContent = fmtPP(wasteDelta);
-    document.getElementById('stemsRecovered').textContent = fmtNum0(stemsRecovered);
-    document.getElementById('directMo').textContent = fmtUSD(directMo);
-    document.getElementById('directYr').textContent = fmtUSD(directYr);
-
-    document.getElementById('claimsMo').textContent = fmtUSD(claimsMo);
-    document.getElementById('gradeMo').textContent = fmtUSD(gradeMo);
-    document.getElementById('energyMo').textContent = fmtUSD(energyMo);
-    document.getElementById('laborMo').textContent = fmtUSD(laborMo);
-    document.getElementById('secondaryMo').textContent = fmtUSD(secondaryMo);
-
-    document.getElementById('totalMo').textContent = fmtUSD(totalMo);
-    document.getElementById('totalYr').textContent = fmtUSD(totalYr);
-    document.getElementById('total5').textContent = fmtUSD(total5);
-    document.getElementById('net5').textContent = fmtUSD(net5);
-    document.getElementById('roiX').textContent = fmtX(roiX);
-
-    document.getElementById('paybackDirect').textContent = fmtMo(paybackDirect);
-    document.getElementById('paybackTotal').textContent = fmtMo(paybackTotal);
+    const set = (id, v) => document.getElementById(id).textContent = v;
+    set('annualStems', fmtNum0(annualStems));
+    set('monthlyStems', fmtNum0(monthlyStems));
+    set('monthlyRev', fmtUSD(monthlyRev));
+    set('wasteDelta', fmtPP(wasteDelta));
+    set('stemsRecovered', fmtNum0(stemsRecovered));
+    set('directMo', fmtUSD(directMo));
+    set('directYr', fmtUSD(directYr));
+    set('claimsMo', fmtUSD(claimsMo));
+    set('gradeMo', fmtUSD(gradeMo));
+    set('energyMo', fmtUSD(energy));
+    set('laborMo', fmtUSD(labor));
+    set('secondaryMo', fmtUSD(secondaryMo));
+    set('totalMo', fmtUSD(totalMo));
+    set('totalYr', fmtUSD(totalYr));
+    set('total5', fmtUSD(total5));
+    set('net5', fmtUSD(net5));
+    set('roiX', fmtX(roiX));
+    set('paybackDirect', fmtMo(paybackDirect));
+    set('paybackTotal', fmtMo(paybackTotal));
   }
 
-  inputs.forEach(id => {
-    document.getElementById(id).addEventListener('input', recalc);
-  });
+  inputs.forEach(id => document.getElementById(id).addEventListener('input', recalc));
 
   // Presets
   const presets = {
@@ -869,7 +1201,6 @@
     hydrangea: { hectares: 25, yield: 200000,  fob: 2.00, wasteBase: 6.5, wasteVcc: 2.0,
                  claimsPct: 2.0, gradePct: 2.5, energy: 4000, labor: 3000, invest: 280000 }
   };
-
   document.querySelectorAll('.preset-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const p = presets[btn.dataset.preset];
@@ -881,8 +1212,19 @@
     });
   });
 
-  document.getElementById('year').textContent = new Date().getFullYear();
-  recalc();
+  // Language buttons
+  document.querySelectorAll('.lang-switch button').forEach(btn => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+  });
+
+  // Initial language: localStorage > browser default > en
+  let initialLang = 'en';
+  try {
+    const stored = localStorage.getItem('vcc_lang');
+    if (stored && TR[stored]) initialLang = stored;
+    else if ((navigator.language || '').toLowerCase().startsWith('es')) initialLang = 'es';
+  } catch(e) {}
+  applyLang(initialLang);
 </script>
 
 </body>
