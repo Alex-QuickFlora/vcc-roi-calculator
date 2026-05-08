@@ -400,6 +400,26 @@
   }
   footer.site a { color: #fff; }
 
+  /* ---- FX rate banner (only shown in ES mode) ---- */
+  .fx-note {
+    background: var(--brand-soft);
+    border: 1px solid #b6dfe5;
+    color: var(--brand-dark);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin: 0 0 24px;
+    display: inline-block;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .fx-note strong { font-weight: 700; color: var(--ink); }
+  .fx-note .fx-stale {
+    color: #9a4b06;
+    font-style: italic;
+    margin-left: 6px;
+  }
+
   @media print {
     header.site, #cta, footer.site { display: none; }
     .hero { background: #fff; color: #000; }
@@ -499,6 +519,8 @@
     <div class="eyebrow" data-i18n="calc.eyebrow">Interactive ROI calculator</div>
     <h2 data-i18n="calc.h2">Model your operation</h2>
     <p class="section-lede" data-i18n="calc.lede">Adjust the inputs on the left to match your farm. Results update instantly. Defaults reflect a 50-hectare commodity rose operation; use the presets for premium specialty growers or large multi-farm groups.</p>
+
+    <div class="fx-note" id="fxNote" hidden></div>
 
     <div class="calc-grid">
       <div class="calc-inputs">
@@ -953,19 +975,23 @@
       "nav.cta": "Solicitar visita técnica",
 
       "hero.h1": "Vea con precisión cuánto pierde su finca por un pre-enfriamiento inadecuado, y en cuánto tiempo el enfriamiento al vacío recupera la inversión.",
-      "hero.lede": "Para una operación típica de exportación de flores de corte de 50 hectáreas, el enfriamiento al vacío reduce la merma poscosecha del 5–8% al 1–3% del volumen embarcado. Esto recupera aproximadamente USD 1 millón al año en ingresos y paga el equipo en menos de cinco meses. Ajuste la calculadora a continuación para modelar su operación.",
+      "hero.lede": "Para una operación típica de exportación de flores de corte de 50 hectáreas, el enfriamiento al vacío reduce la merma poscosecha del 5–8% al 1–3% del volumen embarcado. Esto recupera aproximadamente {{usdC:1000000}} al año en ingresos y paga el equipo en menos de cinco meses. Ajuste la calculadora a continuación para modelar su operación.",
       "hero.stat1.label": "Reducción directa de merma",
       "hero.stat1.value": "4,5 pp",
       "hero.stat1.sub": "De 6,5% base a 2% con VCC",
       "hero.stat2.label": "Ahorro mensual típico",
-      "hero.stat2.value": "USD 83,5K",
+      "hero.stat2.value": "{{usdC:83500}}",
       "hero.stat2.sub": "Directo + secundario, finca estándar de 50 ha",
       "hero.stat3.label": "Recuperación (ahorro total)",
       "hero.stat3.value": "~2,6 meses",
-      "hero.stat3.sub": "Sobre un sistema instalado de USD 220K",
+      "hero.stat3.sub": "Sobre un sistema instalado de {{usdC:220000}}",
       "hero.stat4.label": "Impacto neto a 5 años",
-      "hero.stat4.value": "USD 4,79M",
+      "hero.stat4.value": "{{usdC:4790000}}",
       "hero.stat4.sub": "Ahorro acumulado menos inversión",
+      "calc.fxNote.template": "Tipo de cambio del día: <strong>1 USD = $__RATE__ COP</strong> · Actualizado __DATE__",
+      "calc.fxNote.loading": "Obteniendo tipo de cambio actual...",
+      "calc.fxNote.fallback": "Tipo de cambio aproximado (no se pudo verificar el del día): <strong>1 USD = $__RATE__ COP</strong>",
+      "calc.fxNote.stale": "(rate no actualizado en 24 h)",
 
       "problem.eyebrow": "Por qué importa el pre-enfriamiento",
       "problem.h2": "El costo oculto de usar solo aire forzado",
@@ -1085,20 +1111,113 @@
     }
   };
 
-  // ---------- Number formatters per locale ----------
+  // ---------- Exchange rate (USD → COP) ----------
   let CURRENT_LANG = 'en';
-  const localeOf = lang => lang === 'es' ? 'es-CO' : 'en-US';
-  const fmtUSD = n => isFinite(n)
-    ? (CURRENT_LANG === 'es' ? 'USD ' : '$') + Math.round(n).toLocaleString(localeOf(CURRENT_LANG))
-    : '—';
-  const fmtNum0 = n => isFinite(n) ? Math.round(n).toLocaleString(localeOf(CURRENT_LANG)) : '—';
-  const fmtPP = n => isFinite(n) ? n.toLocaleString(localeOf(CURRENT_LANG), {minimumFractionDigits:1, maximumFractionDigits:1}) + ' pp' : '—';
+  const FALLBACK_COP_RATE = 4100; // approximate fallback if API unreachable
+  const FX_CACHE_KEY = 'vcc_fx_v1';
+  const FX_CACHE_TTL_MS = 6 * 60 * 60 * 1000; // 6 hours
+  let FX = { rate: null, dateUTC: null, source: null, isStale: false };
+
+  function loadCachedFx() {
+    try {
+      const cached = JSON.parse(localStorage.getItem(FX_CACHE_KEY) || 'null');
+      if (cached && cached.rate && cached.fetchedAt) {
+        const age = Date.now() - cached.fetchedAt;
+        FX = {
+          rate: cached.rate,
+          dateUTC: cached.dateUTC,
+          source: cached.source,
+          isStale: age > FX_CACHE_TTL_MS
+        };
+        return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+
+  function fetchFx() {
+    return fetch('https://open.er-api.com/v6/latest/USD', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(data => {
+        if (data.result !== 'success' || !data.rates || !data.rates.COP) {
+          throw new Error('rate unavailable');
+        }
+        FX = {
+          rate: data.rates.COP,
+          dateUTC: data.time_last_update_utc || new Date().toUTCString(),
+          source: 'open.er-api.com',
+          isStale: false
+        };
+        try {
+          localStorage.setItem(FX_CACHE_KEY, JSON.stringify({
+            rate: FX.rate, dateUTC: FX.dateUTC, source: FX.source, fetchedAt: Date.now()
+          }));
+        } catch (e) {}
+        return FX.rate;
+      });
+  }
+
+  // ---------- Number formatters ----------
+  function fmtMoney(usd) {
+    if (!isFinite(usd)) return '—';
+    if (CURRENT_LANG === 'es') {
+      const rate = FX.rate || FALLBACK_COP_RATE;
+      const cop = Math.round(usd * rate);
+      return '$' + cop.toLocaleString('es-CO') + ' COP';
+    }
+    return '$' + Math.round(usd).toLocaleString('en-US');
+  }
+  function fmtMoneyCompact(usd) {
+    if (!isFinite(usd)) return '—';
+    if (CURRENT_LANG === 'es') {
+      const rate = FX.rate || FALLBACK_COP_RATE;
+      const cop = usd * rate;
+      const compact = new Intl.NumberFormat('es-CO', {
+        notation: 'compact', maximumFractionDigits: 1
+      }).format(cop);
+      return '$' + compact + ' COP';
+    }
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'USD',
+      notation: 'compact', maximumFractionDigits: 1
+    }).format(usd);
+  }
+  const fmtNum0 = n => isFinite(n) ? Math.round(n).toLocaleString(CURRENT_LANG === 'es' ? 'es-CO' : 'en-US') : '—';
+  const fmtPP = n => isFinite(n) ? n.toLocaleString(CURRENT_LANG === 'es' ? 'es-CO' : 'en-US', {minimumFractionDigits:1, maximumFractionDigits:1}) + ' pp' : '—';
   const fmtMo = n => isFinite(n) && n > 0
-    ? n.toLocaleString(localeOf(CURRENT_LANG), {minimumFractionDigits:1, maximumFractionDigits:1}) + (CURRENT_LANG === 'es' ? ' meses' : ' mo')
+    ? n.toLocaleString(CURRENT_LANG === 'es' ? 'es-CO' : 'en-US', {minimumFractionDigits:1, maximumFractionDigits:1}) + (CURRENT_LANG === 'es' ? ' meses' : ' mo')
     : '—';
   const fmtX = n => isFinite(n) && n > 0
-    ? n.toLocaleString(localeOf(CURRENT_LANG), {minimumFractionDigits:1, maximumFractionDigits:1}) + 'x'
+    ? n.toLocaleString(CURRENT_LANG === 'es' ? 'es-CO' : 'en-US', {minimumFractionDigits:1, maximumFractionDigits:1}) + 'x'
     : '—';
+
+  // Replace {{usd:N}} (full) and {{usdC:N}} (compact) tokens within translation strings
+  function expandMoneyTokens(text) {
+    return text
+      .replace(/\{\{usdC:(\d+(?:\.\d+)?)\}\}/g, (_, n) => fmtMoneyCompact(parseFloat(n)))
+      .replace(/\{\{usd:(\d+(?:\.\d+)?)\}\}/g, (_, n) => fmtMoney(parseFloat(n)));
+  }
+
+  // ---------- Update FX banner ----------
+  function updateFxNote() {
+    const el = document.getElementById('fxNote');
+    if (!el) return;
+    if (CURRENT_LANG !== 'es') { el.hidden = true; el.innerHTML = ''; return; }
+    el.hidden = false;
+    const dict = TR.es;
+    if (!FX.rate) {
+      el.textContent = dict['calc.fxNote.loading'];
+      return;
+    }
+    const rateStr = FX.rate.toLocaleString('es-CO', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    const dateStr = FX.dateUTC
+      ? new Date(FX.dateUTC).toLocaleDateString('es-CO', {day:'numeric', month:'short', year:'numeric'})
+      : '—';
+    const tplKey = (FX.source === 'open.er-api.com') ? 'calc.fxNote.template' : 'calc.fxNote.fallback';
+    let html = dict[tplKey].replace('__RATE__', rateStr).replace('__DATE__', dateStr);
+    if (FX.isStale) html += ' <span class="fx-stale">' + dict['calc.fxNote.stale'] + '</span>';
+    el.innerHTML = html;
+  }
 
   // ---------- Apply translations ----------
   function applyLang(lang) {
@@ -1113,10 +1232,12 @@
       const val = dict[key];
       if (val == null) return;
       const attr = el.getAttribute('data-i18n-attr');
-      const text = val.replace('__YEAR__', year);
+      const text = expandMoneyTokens(val.replace('__YEAR__', year));
       if (attr) el.setAttribute(attr, text);
       else el.textContent = text;
     });
+
+    updateFxNote();
 
     // Mailto link
     const mail = document.getElementById('ctaMail');
@@ -1171,20 +1292,20 @@
     const set = (id, v) => document.getElementById(id).textContent = v;
     set('annualStems', fmtNum0(annualStems));
     set('monthlyStems', fmtNum0(monthlyStems));
-    set('monthlyRev', fmtUSD(monthlyRev));
+    set('monthlyRev', fmtMoney(monthlyRev));
     set('wasteDelta', fmtPP(wasteDelta));
     set('stemsRecovered', fmtNum0(stemsRecovered));
-    set('directMo', fmtUSD(directMo));
-    set('directYr', fmtUSD(directYr));
-    set('claimsMo', fmtUSD(claimsMo));
-    set('gradeMo', fmtUSD(gradeMo));
-    set('energyMo', fmtUSD(energy));
-    set('laborMo', fmtUSD(labor));
-    set('secondaryMo', fmtUSD(secondaryMo));
-    set('totalMo', fmtUSD(totalMo));
-    set('totalYr', fmtUSD(totalYr));
-    set('total5', fmtUSD(total5));
-    set('net5', fmtUSD(net5));
+    set('directMo', fmtMoney(directMo));
+    set('directYr', fmtMoney(directYr));
+    set('claimsMo', fmtMoney(claimsMo));
+    set('gradeMo', fmtMoney(gradeMo));
+    set('energyMo', fmtMoney(energy));
+    set('laborMo', fmtMoney(labor));
+    set('secondaryMo', fmtMoney(secondaryMo));
+    set('totalMo', fmtMoney(totalMo));
+    set('totalYr', fmtMoney(totalYr));
+    set('total5', fmtMoney(total5));
+    set('net5', fmtMoney(net5));
     set('roiX', fmtX(roiX));
     set('paybackDirect', fmtMo(paybackDirect));
     set('paybackTotal', fmtMo(paybackTotal));
@@ -1224,7 +1345,21 @@
     if (stored && TR[stored]) initialLang = stored;
     else if ((navigator.language || '').toLowerCase().startsWith('es')) initialLang = 'es';
   } catch(e) {}
+
+  // Use cached FX rate immediately so first render isn't blocked
+  loadCachedFx();
   applyLang(initialLang);
+
+  // Then fetch the live rate and re-render
+  fetchFx()
+    .then(() => applyLang(CURRENT_LANG))
+    .catch(() => {
+      // If both API and cache failed, force a stale-fallback marker
+      if (!FX.rate) {
+        FX = { rate: FALLBACK_COP_RATE, dateUTC: null, source: 'fallback', isStale: true };
+        applyLang(CURRENT_LANG);
+      }
+    });
 </script>
 
 </body>
