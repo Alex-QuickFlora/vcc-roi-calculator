@@ -365,10 +365,76 @@
   }
   .btn-primary { background: #fff; color: var(--brand-dark); }
   .btn-primary:hover { background: #e0f4f6; text-decoration: none; }
+  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
   .btn-secondary {
     background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.4);
   }
   .btn-secondary:hover { background: rgba(255,255,255,.08); text-decoration: none; }
+
+  /* Lead-capture form on the CTA section */
+  .cta-form {
+    display: grid;
+    gap: 10px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .cta-form input {
+    width: 100%;
+    padding: 13px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.25);
+    background: rgba(255,255,255,.08);
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+  }
+  .cta-form input::placeholder { color: rgba(255,255,255,.6); }
+  .cta-form input:focus {
+    outline: none;
+    border-color: #fff;
+    background: rgba(255,255,255,.15);
+  }
+  .cta-form button {
+    width: 100%;
+    margin-top: 4px;
+    padding: 14px 24px;
+  }
+  .form-status {
+    max-width: 480px;
+    margin: 16px auto 0;
+    padding: 14px 18px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .form-status.success {
+    background: rgba(255,255,255,.95);
+    color: var(--brand-dark);
+  }
+  .form-status.error {
+    background: rgba(255,235,235,.95);
+    color: #9a1b1b;
+  }
+  .cta-secondary {
+    text-align: center;
+    margin: 28px auto 0;
+    color: #d6f0f3;
+    font-size: 14px;
+  }
+  .cta-secondary a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  .cta-privacy {
+    text-align: center;
+    margin: 12px auto 0;
+    color: rgba(255,255,255,.55);
+    font-size: 11px;
+    max-width: 480px;
+    line-height: 1.5;
+  }
 
   .about-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;
@@ -787,10 +853,30 @@
   <div class="container">
     <h2 data-i18n="cta.h2">Ready for a tailored ROI projection?</h2>
     <p data-i18n="cta.p">The calculator gives you a directional answer. A site visit gives you a number you can put in front of your CFO. Vacuum Cooling Colombia builds a customized model from your 12 months of stem volume, current waste tracking, and claims history.</p>
-    <div class="cta-buttons">
-      <a class="btn-primary" id="ctaMail" data-i18n="cta.btn1" href="#">Request a site visit</a>
-      <a class="btn-secondary" href="https://www.linkedin.com/in/mauricio-gleiser" target="_blank" rel="noopener" data-i18n="cta.btn2">Connect on LinkedIn</a>
-    </div>
+
+    <form id="leadForm" class="cta-form" novalidate>
+      <input type="text" name="name" id="leadName" required
+             data-i18n-attr="placeholder" data-i18n="cta.f.name" placeholder="Your name" />
+      <input type="email" name="email" id="leadEmail" required
+             data-i18n-attr="placeholder" data-i18n="cta.f.email" placeholder="Your email" />
+      <input type="text" name="farm" id="leadFarm"
+             data-i18n-attr="placeholder" data-i18n="cta.f.farm" placeholder="Farm or company (optional)" />
+      <button type="submit" class="btn-primary" id="leadSubmit" data-i18n="cta.f.submit">
+        Email me my report
+      </button>
+    </form>
+
+    <div id="formStatus" class="form-status" hidden></div>
+
+    <p class="cta-privacy" data-i18n="cta.f.privacy">
+      Your numbers stay private. Mauricio will use them only to prepare your custom report.
+    </p>
+
+    <p class="cta-secondary">
+      <span data-i18n="cta.f.linkedinPrefix">Prefer to skip the form?</span>
+      &nbsp;
+      <a href="https://www.linkedin.com/in/mauricio-gleiser" target="_blank" rel="noopener" data-i18n="cta.btn2">Connect on LinkedIn</a>
+    </p>
   </div>
 </section>
 
@@ -970,6 +1056,15 @@
       "cta.btn2": "Connect on LinkedIn",
       "cta.mailSubj": "Vacuum Cooling Colombia — Site visit request",
       "cta.mailBody": "Hello Mauricio,\n\nI'd like to schedule a site visit and customized ROI projection for our operation.\n\nFarm name:\nHectares:\nVariety mix:\nCurrent cold-chain setup:\n\nThanks,",
+      "cta.f.name": "Your name",
+      "cta.f.email": "Your email",
+      "cta.f.farm": "Farm or company (optional)",
+      "cta.f.submit": "Email me my report",
+      "cta.f.sending": "Sending…",
+      "cta.f.success": "Got it. Mauricio will email your custom report within 24 hours.",
+      "cta.f.error": "Couldn't send. Please try again or email Mauricio directly.",
+      "cta.f.privacy": "Your numbers stay private. Mauricio will use them only to prepare your custom report.",
+      "cta.f.linkedinPrefix": "Prefer to skip the form?",
 
       "about.eyebrow": "Who you're working with",
       "about.h2": "About Mauricio Gleiser",
@@ -1114,6 +1209,15 @@
       "cta.btn2": "Conectar en LinkedIn",
       "cta.mailSubj": "Vacuum Cooling Colombia — Solicitud de visita técnica",
       "cta.mailBody": "Hola Mauricio,\n\nMe gustaría agendar una visita técnica y una proyección de ROI personalizada para nuestra operación.\n\nNombre de la finca:\nHectáreas:\nMezcla de variedades:\nConfiguración actual de cadena de frío:\n\nGracias,",
+      "cta.f.name": "Su nombre",
+      "cta.f.email": "Su correo electrónico",
+      "cta.f.farm": "Finca o empresa (opcional)",
+      "cta.f.submit": "Enviarme mi informe",
+      "cta.f.sending": "Enviando…",
+      "cta.f.success": "Recibido. Mauricio le enviará su informe personalizado en menos de 24 horas.",
+      "cta.f.error": "No se pudo enviar. Inténtelo de nuevo o escriba directamente a Mauricio.",
+      "cta.f.privacy": "Sus cifras son privadas. Mauricio solo las usará para preparar su informe personalizado.",
+      "cta.f.linkedinPrefix": "¿Prefiere saltar el formulario?",
 
       "about.eyebrow": "Con quién está trabajando",
       "about.h2": "Sobre Mauricio Gleiser",
@@ -1435,6 +1539,157 @@
   // Use cached FX rate immediately so first render isn't blocked
   loadCachedFx();
   applyLang(initialLang);
+
+  // ---------- Lead capture form (Web3Forms) ----------
+  // Get your free access key at https://web3forms.com — enter alex@hypervend.com
+  // and check that inbox for the key. Paste it below in place of the placeholder.
+  const WEB3FORMS_ACCESS_KEY = "REPLACE_WITH_YOUR_ACCESS_KEY";
+
+  const leadForm = document.getElementById("leadForm");
+  const formStatus = document.getElementById("formStatus");
+  const leadSubmit = document.getElementById("leadSubmit");
+
+  function setStatus(kind, text) {
+    formStatus.className = "form-status " + kind;
+    formStatus.textContent = text;
+    formStatus.hidden = false;
+  }
+
+  function gatherRoiSnapshot() {
+    // Recompute the same math as recalc() so the email payload always
+    // matches what the user just saw on screen.
+    const hectares = num("hectares");
+    const yieldPerHa = num("yield");
+    const fob = usdValues.fob || 0;
+    const wBase = num("wasteBase") / 100;
+    const wVcc = num("wasteVcc") / 100;
+    const claimsPct = num("claimsPct") / 100;
+    const gradePct = num("gradePct") / 100;
+    const energy = usdValues.energy || 0;
+    const labor = usdValues.labor || 0;
+    const invest = usdValues.invest || 0;
+
+    const annualStems = hectares * yieldPerHa;
+    const monthlyStems = annualStems / 12;
+    const monthlyRev = monthlyStems * fob;
+    const stemsRecovered = monthlyStems * (wBase - wVcc);
+    const directMo = stemsRecovered * fob;
+    const directYr = directMo * 12;
+    const claimsMo = monthlyRev * claimsPct;
+    const gradeMo = monthlyRev * gradePct;
+    const secondaryMo = claimsMo + gradeMo + energy + labor;
+    const totalMo = directMo + secondaryMo;
+    const totalYr = totalMo * 12;
+    const total5 = totalYr * 5;
+    const net5 = total5 - invest;
+    const roiX = invest > 0 ? total5 / invest : 0;
+    const paybackDirect = directMo > 0 ? invest / directMo : 0;
+    const paybackTotal = totalMo > 0 ? invest / totalMo : 0;
+
+    const r = (n) => Math.round(n);
+    const r1 = (n) => Math.round(n * 10) / 10;
+    const fxRate = FX.rate || null;
+
+    return {
+      // Inputs the lead filled in
+      input_hectares: r(hectares),
+      input_yield_per_ha_stems: r(yieldPerHa),
+      input_fob_per_stem_usd: fob.toFixed(2),
+      input_baseline_waste_pct: r1(wBase * 100),
+      input_post_vcc_waste_pct: r1(wVcc * 100),
+      input_claims_pct_of_revenue: r1(claimsPct * 100),
+      input_grade_pct_of_revenue: r1(gradePct * 100),
+      input_energy_savings_mo_usd: r(energy),
+      input_labor_savings_mo_usd: r(labor),
+      input_system_cost_usd: r(invest),
+
+      // Computed results, USD baseline
+      result_monthly_revenue_usd: r(monthlyRev),
+      result_direct_savings_mo_usd: r(directMo),
+      result_direct_savings_yr_usd: r(directYr),
+      result_secondary_mo_usd: r(secondaryMo),
+      result_total_savings_mo_usd: r(totalMo),
+      result_total_savings_yr_usd: r(totalYr),
+      result_total_savings_5yr_usd: r(total5),
+      result_net_5yr_impact_usd: r(net5),
+      result_roi_multiple_5yr: r1(roiX),
+      result_payback_direct_months: r1(paybackDirect),
+      result_payback_total_months: r1(paybackTotal),
+
+      // What the user actually saw
+      display_language: CURRENT_LANG,
+      display_currency: CURRENT_LANG === "es" ? "COP" : "USD",
+      fx_rate_used_cop_per_usd: fxRate,
+      submitted_at_utc: new Date().toISOString(),
+    };
+  }
+
+  if (leadForm) {
+    leadForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const dict = TR[CURRENT_LANG] || TR.en;
+      const name = document.getElementById("leadName").value.trim();
+      const email = document.getElementById("leadEmail").value.trim();
+      const farm = document.getElementById("leadFarm").value.trim();
+
+      if (!name || !email) {
+        setStatus("error", dict["cta.f.error"]);
+        return;
+      }
+
+      if (WEB3FORMS_ACCESS_KEY === "REPLACE_WITH_YOUR_ACCESS_KEY") {
+        setStatus(
+          "error",
+          "Form not yet configured. Get a Web3Forms access key at https://web3forms.com and replace the placeholder in the page source.",
+        );
+        return;
+      }
+
+      leadSubmit.disabled = true;
+      leadSubmit.textContent = dict["cta.f.sending"];
+
+      const roi = gatherRoiSnapshot();
+      const subject =
+        "VCC ROI · " + name +
+        (farm ? " (" + farm + ")" : "") +
+        " · $" + roi.result_total_savings_mo_usd.toLocaleString() + "/mo savings";
+
+      const payload = {
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: subject,
+        from_name: "VCC ROI Calculator",
+        reply_to: email,
+
+        lead_name: name,
+        lead_email: email,
+        lead_farm: farm || "(not provided)",
+
+        ...roi,
+      };
+
+      try {
+        const r = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+        const json = await r.json();
+        if (r.ok && json.success) {
+          leadForm.hidden = true;
+          setStatus("success", dict["cta.f.success"]);
+        } else {
+          throw new Error(json.message || "Web3Forms returned an error");
+        }
+      } catch (err) {
+        leadSubmit.disabled = false;
+        leadSubmit.textContent = dict["cta.f.submit"];
+        setStatus("error", dict["cta.f.error"]);
+      }
+    });
+  }
 
   // Then fetch the live rate and re-render
   fetchFx()
